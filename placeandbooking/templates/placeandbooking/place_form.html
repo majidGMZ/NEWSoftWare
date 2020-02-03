@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>new place!</title>
+</head>
+<body>
+    <h1>
+        {% if not new_place %}
+        Add your place
+        {% endif %}
+    </h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Register my place" >
+    </form>
+
+</body>
+</html>
