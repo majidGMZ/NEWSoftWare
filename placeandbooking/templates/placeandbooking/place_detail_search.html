@@ -21,5 +21,8 @@
         <h2>Host Language: {{ place_detail.HostLanguage }}</h2>
     </div>
 
+
+    <a href="{% url 'placeandbooking:send_request' pk=place_detail.pk %}"><button type="submit">Send Request</button></a>
+
 </body>
 </html>
