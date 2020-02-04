@@ -1,0 +1,11 @@
+
+
+<h1>well com to list of event</h1>
+<ol>
+
+    {% for a in event_all%}
+      <h1> <a href="{{ a.id }}" >{{ a.title}}</a> </h1>
+        <p>username: {{a.username}}</p>
+        <p>city: {{ a.city }}</p>
+    {% endfor %}
+</ol>
