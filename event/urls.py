@@ -13,6 +13,7 @@ urlpatterns = [
     path('home/', views.HomePageView.as_view(), name='home'),
     path('home/search/<int:pk>/', views.EventDetailView.as_view(), name='detail_search'),
     path('<int:id>/remove/', views.EventDeleteView.as_view(), name='event_delete'),
-    path('<int:pk>/comment/', views.add_comment_to_post(), name='add_comment_to_post'),
-    path('comment/<int:pk>/approve/', views.comment_approve(), name='comment_approve'),
+    path('<int:pk>/comment/', views.add_comment_to_post, name='add_comment_to_post'),
+    path('comment/<int:pk>/approve/', views.comment_approve, name='comment_approve'),
+    path('comment/<int:pk>/remove/', views.comment_remove, name='comment_remove'),
 ]

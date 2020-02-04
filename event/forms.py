@@ -11,7 +11,7 @@ class EventModelForm(forms.ModelForm):
 
 
 class CommentModelForm(forms.ModelForm):
-    class Meta():
+    class Meta:
         model = Comment
         fields = [
             'username', 'text',
