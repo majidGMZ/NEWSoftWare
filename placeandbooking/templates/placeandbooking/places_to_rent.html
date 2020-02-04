@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>rent offer!</title>
+</head>
+<body>
+    <h1>
+    List of places you can rent:
+        <ol>
+            {% for place in places %}
+            <h2>
+                <a href="{{ place.id }}"> {{ place.City }}</a>
+            </h2>
+            {% endfor %}
+        </ol>
+    </h1>
+</body>
+</html>
