@@ -50,6 +50,7 @@ class PlaceDetail_Search(generic.DeleteView):
 
 
 
+
 class SearchResult(generic.ListView):
     models = models.Place
     template_name = 'placeandbooking/search_results.html'
@@ -76,7 +77,18 @@ def checkTorF(input):
 
 class RegisterBooking(generic.CreateView):
     model = models.Booking
-    model.placerelation = 'teh'
-    fields = ['placerelation','Arrival','Depart']
+    fields = ['Arrival','Depart']
     context_object_name = 'booking'
     template_name = 'placeandbooking/places_requested_for_rent.html'
+
+class BookingList(generic.ListView):
+    model = models.Booking
+    context_object_name = 'books'
+    template_name = 'placeandbooking/Bookings.html'
+
+class BookingDetail(generic.DetailView):
+    model = models.Booking
+    context_object_name = 'booked'
+    template_name = 'placeandbooking/bookdetail.html'
+
+

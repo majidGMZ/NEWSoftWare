@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results:</title>
+</head>
+<body>
+
+
+
+    <h1>Results:</h1>
+    <ul>
+        {% for book in books %}
+        <li>
+            <h3><a href="{{ book.id }}">{{ book.id }}</a></h3>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
