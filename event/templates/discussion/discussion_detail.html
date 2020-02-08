@@ -1,0 +1,31 @@
+<h2>discussion detail :</h2>
+
+    {% for a in event_all%}
+        <p>{{ a.title}}</p>
+        <p>username: {{a.username}}</p>
+        <p>city: {{ a.city }}</p>
+
+    `   <a class="btn btn-default" href="{% url 'event:add_comment_to_discussion' pk=a.pk %}">Add comment</a>
+    {% endfor %}
+
+
+<h3>comment:</h3>
+{% for comment in event_all  %}
+  {% if user.is_authenticated or comment.approved_comment %}
+    <div class="comment">
+    <strong>{{ comment.username }}</strong>
+        <p>{{ comment.text|linebreaks }}</p>
+     {{ comment.created_date }}
+        <div class="date">
+            {% if not comment.approved_comment %}
+                <a class="btn btn-default" href="{% url 'event:comment_discussion_remove' pk=comment.pk %}">remove your comment<span class="glyphicon glyphicon-remove"></span></a>
+                <a class="btn btn-default" href="{% url 'event:comment_discussion_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+            {% endif %}
+        </div>
+
+    </div>
+    {% endif %}
+{% empty %}
+    <p>No comments here yet :(</p>
+{% endfor %}
+

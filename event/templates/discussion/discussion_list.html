@@ -1,0 +1,10 @@
+<h1>well com to list of discustion in your city</h1>
+<ol>
+
+    {% for a in event_all%}
+      <h1> <a href="{% url 'event:discussion_detail' pk=a.pk %}" >{{ a.title}}</a> </h1>
+        <p>username: {{a.username}}</p>
+        <p>city: {{ a.city }}</p>
+        <a href="{% url 'event:discussion_detail' pk=a.pk %}">Comments: {{ a.comments.count }}</a>
+    {% endfor %}
+</ol>
