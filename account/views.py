@@ -38,18 +38,18 @@ class Auth:
         if self.method == 'POST':
             form = UserCreationForm(self.POST)
             if form.is_valid():
-                form.save()
                 email = form.cleaned_data.get('email')
                 username = form.cleaned_data.get('username')
                 raw_password = form.cleaned_data.get('password1')
+                digits = "".join([random.choice(string.digits + string.ascii_letters) for i in range(10)])
+                email = EmailMessage('Hello', 'http://localhost:8000/panel/verify?link=' + digits,
+                                     to=['movaffaghmahsa@gmail.com'])  # fill this param
+                email.send()
+                form.link = digits
+                form.save()
                 user = authenticate(username=username, password=raw_password)
                 #login(self, user)
-                digits = "".join([random.choice(string.digits + string.letters) for i in range(10)])
-                email = EmailMessage('Hello', 'http://localhost:8000/panel/verify?link=' + digits,
-                                     to=['']) # fill this param
-                email.send()
-                self.user.link = digits
-                self.user.save()
+                #user.save()
                 return HttpResponseRedirect('/accounts/login')
         else:
             form = UserCreationForm()
