@@ -17,10 +17,12 @@ urlpatterns = [
     path('event/comment/<int:pk>/approve/', views.comment_approve, name='comment_approve'),
     path('event/comment/<int:pk>/remove/', views.comment_remove, name='comment_remove'),
     path('discussion/create/', views.DiscussionCreateView.as_view(), name='discussion_create'),
+    path('discussion/<int:pk>/update/', views.DiscussionUpdateView.as_view(), name='discussion_update'),
+    path('discussion/<int:id>/remove/', views.DiscussionDeleteView.as_view(), name='discussion_delete'),
     path('discussion/detail/<slug:city>', views.DicussionListView, name='discussion_detail_city'),
     path('discussion/<int:pk>/', views.DiscussionDetailView.as_view(), name='discussion_detail'),
     path('discussion/comment/<int:pk>', views.add_comment_to_discussion, name='add_comment_to_discussion'),
-    path('discussion/comment/<int:pk>/approve/', views.comment_approve, name='comment_discussion_approve'),
-    path('discussion/comment/<int:pk>/remove/', views.comment_remove, name='comment_discussion_remove'),
+    path('discussion/comment/<int:pk>/approve/', views.comment_discussion_approve, name='comment_discussion_approve'),
+    path('discussion/comment/<int:pk>/remove/', views.comment_discussion_remove, name='comment_discussion_remove'),
 
 ]
