@@ -14,4 +14,9 @@ urlpatterns = [
     path('search/<int:pk>/Book',views.RegisterBooking.as_view(),name = 'send_request'),
     path('bookings/',views.BookingList.as_view(), name = 'bookings'),
     path('bookings/<int:pk>/',views.BookingDetail.as_view(), name = 'booking_detail'),
+    path('placesbooking/',views.BookingsPlaceList.as_view(), name = 'place_booking'),
+    path('placesbooking/<int:pk>/',views.BookingForPlace.as_view(),name = 'booking_for_place'),
+    path('placesbooking/<int:place_id>/<int:pk>/',views.BookingDetailPlace.as_view(), name = 'book_detail'),
+    path('update/<int:pk>/',views.HostAccept.as_view(),name = 'acceptance'),
+    path('delete/<int:pk>/',views.HostDeleteBooking.as_view(), name = 'reject'),
 ]

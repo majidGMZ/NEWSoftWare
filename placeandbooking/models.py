@@ -33,8 +33,7 @@ class Booking(models.Model):
     Arrival = models.DateField(null=False)
     Depart = models.DateField(null=False)
     AcceptanceByHost = models.BooleanField(default=False)
-
-
+    
     #to define wich user rented the home
 
     def __str__(self):

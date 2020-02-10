@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{% extends "placeandbooking/base.html" %}
+{% block body_block %}
+
     <h1>place {{ place_detail.Address }} details:</h1>
 
     <div>
@@ -21,5 +17,4 @@
         <h2>Host Language: {{ place_detail.HostLanguage }}</h2>
     </div>
 
-</body>
-</html>
+{% endblock %}

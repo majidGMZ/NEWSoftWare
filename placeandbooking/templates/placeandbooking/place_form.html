@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>new place!</title>
-</head>
-<body>
+{% extends "placeandbooking/base.html" %}
+{% block body_block %}
+
     <h1>
         {% if not new_place %}
         Add your place
@@ -17,5 +13,4 @@
         <input type="submit" value="Register my place" >
     </form>
 
-</body>
-</html>
+{% endblock %}

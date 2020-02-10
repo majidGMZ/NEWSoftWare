@@ -3,16 +3,13 @@
 
 
 
-
-
-    <h1>Results:</h1>
+    <h1>Bookings:</h1>
     <ul>
-        {% for book in books %}
+        {% for book in book_place %}
         <li>
             <h3><a href="{{ book.id }}">{{ book.id }}</a></h3>
         </li>
         {% endfor %}
     </ul>
-
 
 {% endblock %}
