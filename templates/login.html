@@ -1,0 +1,23 @@
+<html>
+    <head>
+
+        <script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script language="javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script language="javascript" src="https://momentjs.com/downloads/moment.js"></script>
+        <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
+    </head>
+    <body style="text-align: center">
+        <div style="display: inline-block; border: solid; border-width: 2px; border-radius: 20px; border-color: green; padding: 25px; margin-top: 30vh;">
+            <h2>Login</h2>
+            <form method="post">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit">Login</button>
+            </form>
+        </div>
+    </body>
+</html>
+
+
