@@ -24,5 +24,6 @@ urlpatterns = [
     path('discussion/comment/<int:pk>', views.add_comment_to_discussion, name='add_comment_to_discussion'),
     path('discussion/comment/<int:pk>/approve/', views.comment_discussion_approve, name='comment_discussion_approve'),
     path('discussion/comment/<int:pk>/remove/', views.comment_discussion_remove, name='comment_discussion_remove'),
+    path('index/', views.navbar, name='list_event'),
 
 ]
