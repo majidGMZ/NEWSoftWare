@@ -1,0 +1,26 @@
+{% extends "placeandbooking/base.html" %}
+{% block body_block %}
+
+    <h1>
+    {% if  not form.instance.pk%}
+    New Booking:
+    {% else %}
+        Accept Booking:
+    {% endif %}
+    </h1>
+
+{#    <form method="post">#}
+{#        {% csrf_token %}#}
+{#        <p><label for="id_place">Place:</label> <input hidden name="place" id="id_place"></p>#}
+{#        <p><label for="id_Arrival">Arrival:</label> <input type="text" name="Arrival" value="2020-01-01" required="" id="id_Arrival"></p>#}
+{#        <p><label for="id_Depart">Depart:</label> <input type="text" name="Depart" value="2020-02-11" required="" id="id_Depart"></p>#}
+{#        <input type="submit" value="Send Request" >#}
+{#    </form>#}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Send Request" >
+    </form>
+
+{% endblock %}
