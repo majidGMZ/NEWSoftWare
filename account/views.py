@@ -26,6 +26,7 @@ class Auth:
             if form.is_valid():
                 email = form.cleaned_data.get('email')
                 username = form.cleaned_data.get('username')
+
                 
                 raw_password = form.cleaned_data.get('password')
                 digits = "".join([random.choice(string.digits + string.ascii_letters) for i in range(10)])
@@ -41,7 +42,9 @@ class Auth:
                 return HttpResponseRedirect('/accounts/login')
         else:
             form = UserCreationForm()
-        return render(self, 'signup.html', {'form': form})
+
+        return render(self, 'account/signup.html', {'form': form})
+
 
     def login(self):
         if self.method == 'POST':
@@ -53,11 +56,15 @@ class Auth:
                 if user is not None:
                     if user.is_active:
                         login(self, user)
-                        return HttpResponseRedirect('/panel')
+
+                        return HttpResponseRedirect('/f/index')
+
                     else:
                         return HttpResponse('Disabled account')
                 else:
                     return HttpResponse('Invalid login')
         else:
             form = LoginForm()
+
             return render(self, 'login.html', {'form': form})
+

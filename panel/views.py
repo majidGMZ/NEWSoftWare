@@ -22,7 +22,9 @@ class Panel:
     @login_required(login_url='/signin')
     def home(self):
         addresses = Spaces.objects.filter(user_id=self.user.id)  # values_list('address', flat=True)
-        return render(self, 'panel.html', {'addresses': addresses})
+
+        return render(self, 'account/panel.html', {'addresses': addresses})
+
 
     @login_required(login_url='/signin')
     def verify(self):
@@ -86,13 +88,16 @@ class Panel:
             user.civ = self.POST["civ"]
             user.cil = self.POST["cil"]
             user.save()
-            return render(self, 'profile.html', {'user': user})
+
+            return render(self, 'account/profile.html', {'user': user})
+
         else:
             pprint(self.user)
             pprint("---------------------")
             # return HttpResponse(self.user)
             # addresses = Spaces.objects.filter(user_id=self.user.id) #values_list('address', flat=True)
-            return render(self, 'profile.html', {'user': self.user})
+
+            return render(self, 'account/profile.html', {'user': self.user})
 
     @login_required(login_url='/signin')
     def delete_item(self):
@@ -101,28 +106,6 @@ class Panel:
 
     @login_required(login_url='/signin')
     def submit_item(self):
-        # pprint(self.user.username)
-        # self.user.username = "test11"
-        # self.user.save()
-
-        # s = Spaces()
-        # s.address = "address1"
-        # s.price = 4236
-        # s.user_id = self.user.id
-        # s.save()
-        #
-        # s = Spaces()
-        # s.address = "address2"
-        # s.price = 4695
-        # s.user_id = self.user.id
-        # s.save()
-        #
-        # s = Spaces()
-        # s.address = "address3"
-        # s.price = 4125
-        # s.user_id = self.user.id
-        # s.save()
-        #
         s = Spaces()
         s.address = self.POST["address"]
         s.price = self.POST["price"]

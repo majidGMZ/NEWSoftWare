@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login V17</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{% static '/account/images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/account/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/account/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/account/fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/account/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/account/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/account/vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/account/vendor/select2/select2.min.css' %}/">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/account/vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/account/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static '/account/css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+<body>
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form method="post" class="login100-form validate-form">
+					<span class="login100-form-title p-b-34">
+						Account Login
+					</span>
+
+					<div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Type user name">
+                        {% csrf_token %}
+						<input type="email" name="user_email" maxlength="255" required="" id="id_user_email" class="input100" placeholder="Email">
+						<span class="focus-input100"></span>
+					</div>
+					<div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20" data-validate="Type password">
+						<input name="password" maxlength="255" required="" id="id_password" class="input100" type="password" placeholder="Password">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Sign in
+						</button>
+					</div>
+
+					<div class="w-full text-center p-t-27 p-b-239">
+						<span class="txt1">
+{#							Forgot#}
+						</span>
+
+						<a href="#" class="txt2">
+{#							User name / password?#}
+						</a>
+					</div>
+
+					<div class="w-full text-center">
+						<a href="#" class="txt3">
+							Sign Up
+						</a>
+					</div>
+				</form>
+
+				<div class="login100-more" style="background-image: url({% static '/account/images/bg-01.jpg' %});"></div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+	<script src="{% static '/account/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static '/account/vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static '/account/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static '/account/vendor/bootstrap/js/bootstrap.min.js'%}"></script>
+<!--===============================================================================================-->
+	<script src="{% static '/account/vendor/select2/select2.min.js' %}"></script>
+	<script>
+		$(".selection-2").select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $('#dropDownSelect1')
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static '/account/vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static '/account/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static '/account/vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static '/account/js/main.js' %}"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{#<html>#}
+{#    <head>#}
+{##}
+{#        <script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>#}
+{#        <script language="javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
+{#        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">#}
+{#        <script language="javascript" src="https://momentjs.com/downloads/moment.js"></script>#}
+{#        <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>#}
+{#        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">#}
+{#    </head>#}
+{#    <body style="text-align: center">#}
+{#        <div style="display: inline-block; border: solid; border-width: 2px; border-radius: 20px; border-color: green; padding: 25px; margin-top: 30vh;">#}
+{#            <h2>Login</h2>#}
+{#            <form method="post">#}
+{#              {% csrf_token %}#}
+{#              {{ form.as_p }}#}
+{#              <button type="submit">Login</button>#}
+{#            </form>#}
+{#        </div>#}
+{#    </body>#}
+{#</html>#}
+{##}
+{#<form method="post">#}
+{#              <input type="hidden" name="csrfmiddlewaretoken" value="EUVnqJZT1I65khqaf6zRyJHJKoZyXet6Y3gCWi20J9yq0R1q4Ssu3ohcQO9KrwD5">#}
+{#              <p><label for="id_user_email">User email:</label> <input type="email" name="user_email" maxlength="255" required="" id="id_user_email"></p>#}
+{#<p><label for="id_password">Password:</label> <input type="text" name="password" maxlength="255" required="" id="id_password"></p>#}
+{#              <button type="submit">Login</button>#}
+{#            </form>#}

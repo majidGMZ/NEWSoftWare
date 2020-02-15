@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+
 from django.conf.global_settings import EMAIL_USE_TLS, AUTH_USER_MODEL
+
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -41,11 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+
     'account',
     'login_required',
     'front',
     'panel',
     'placeandbooking',
+
 ]
 
 MIDDLEWARE = [
@@ -91,6 +95,7 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
+
 
 EMAIL_HOST_USER = 'mammadiu@gmail.com'
 EMAIL_HOST_PASSWORD = 'mammad1234'
