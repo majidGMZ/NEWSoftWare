@@ -171,7 +171,7 @@ class mybookingdetail(generic.DetailView):
 
     def get_queryset(self):
         print(self.kwargs)
-        return models.Booking.objects.filter(pk=2)
+        return models.Booking.objects.filte()
 
 
 class HostAccept(generic.UpdateView):
