@@ -32,11 +32,9 @@
             <p><label><i class="fa fa-calendar-o"></i> Check Out</label></p>
             <input class="w3-input w3-border" type="text" placeholder="DD MM YYYY" name="CheckOut" required>
             <p>
-                <a href="{% url 'placeandbooking:send_request' place_detail.id %}">
-                    <button class="w3-button w3-block w3-green w3-left-align" type="submit">
-                        <i class="fa w3-margin-right"></i> Send Request
-                    </button>
-                </a>
+                <button class="w3-button w3-block w3-green w3-left-align" type="submit"><i
+                        class="fa w3-margin-right"></i> Send Request
+                </button>
             </p>
         </form>
     </div>
@@ -93,6 +91,7 @@
                     {% endif %}</p>
             </div>
         </div>
+        <p><a href="{% url 'placeandbooking:edit_place' pk=place_detail.pk %}"> Edit </a></p>
         <hr>
 
         <h4><strong>Extra Info</strong></h4>
@@ -166,28 +165,25 @@
 </html>
 
 
-
-
-{% extends "placeandbooking/base.html" %}
-{% block body_block %}
-
-    <h1>place {{ place_detail.Address }} details:</h1>
-
-    <div>
-        <h2>City: {{ place_detail.City }}</h2>
-        <h2>Address: {{ place_detail.Address }}</h2>
-        <h2>Home type: {{ place_detail.KindofHome }}</h2>
-        <h2>Room type: {{ place_detail.RoomType }}</h2>
-        <h2>Beds: {{ place_detail.Capacity }}</h2>
-        <h2>Description: {{ place_detail.Description }}</h2>
-        <h2>Photo: {{ place_detail.PlacePhoto }}</h2>
-        <h2>Pets allowed: {{ place_detail.Pets }}</h2>
-        <h2>Kids at home: {{ place_detail.Kids }}</h2>
-        <h2>Smoking allowed: {{ place_detail.SmokingAllowed }}</h2>
-        <h2>Host Language: {{ place_detail.HostLanguage }}</h2>
-    </div>
-
-
-    <a href="{% url 'placeandbooking:send_request' place_detail.id %}"><button type="submit">Send Request</button></a>
-
-{% endblock %}
+{##}
+{#{% extends "placeandbooking/base.html" %}#}
+{#{% block body_block %}#}
+{##}
+{#    <h1>place {{ place_detail.Address }} details:</h1>#}
+{##}
+{#    <div>#}
+{#        <h2>City: {{ place_detail.City }}</h2>#}
+{#        <h2>Address: {{ place_detail.Address }}</h2>#}
+{#        <h2>Home type: {{ place_detail.KindofHome }}</h2>#}
+{#        <h2>Room type: {{ place_detail.RoomType }}</h2>#}
+{#        <h2>Beds: {{ place_detail.Capacity }}</h2>#}
+{#        <h2>Description: {{ place_detail.Description }}</h2>#}
+{#        <h2>Photo: {{ place_detail.PlacePhoto }}</h2>#}
+{#        <h2>Pets allowed: {{ place_detail.Pets }}</h2>#}
+{#        <h2>Kids at home: {{ place_detail.Kids }}</h2>#}
+{#        <h2>Smoking allowed: {{ place_detail.SmokingAllowed }}</h2>#}
+{#    </div>#}
+{##}
+{#         <p><a href="{% url 'placeandbooking:edit_place' pk=place_detail.pk %}"> Edit </a></p>#}
+{##}
+{#{% endblock %}#}

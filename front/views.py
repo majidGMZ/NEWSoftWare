@@ -11,6 +11,7 @@ class Front:
         return render(self, 'account/Spaces.html', {'spaces': spaces})
 
 
+
     def Space(self):
         space = Spaces.objects.filter(id=self.GET['id'])
         comments = Comments.objects.filter(space_id=self.GET['id'])
@@ -19,3 +20,4 @@ class Front:
         if mrank is None:
             mrank = 0
         return render(self, 'account/SingleSpace.html', {'space': space[0], 'comments': comments, 'rank': mrank})
+
