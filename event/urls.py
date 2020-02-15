@@ -9,7 +9,7 @@ urlpatterns = [
     path('event/s/<int:pk>/', views.CommentOneEventDetailView.as_view(), name='comment_detail'),
     path('event/create/', views.EventCreateView.as_view(), name='event_create'),
     path('event/<int:pk>/update/', views.EventUpdateView.as_view(), name='event_update'),
-    path('event/home/search/', views.SearchResultsView.as_view(), name='event_search'),
+    path('event/home/search/', views.EventDetailView.as_view(), name='event_search'),
     path('event/home/', views.HomePageView.as_view(), name='home'),
     path('event/home/search/<int:pk>/', views.EventDetailView.as_view(), name='detail_search'),
     path('event/<int:id>/remove/', views.EventDeleteView.as_view(), name='event_delete'),
@@ -24,6 +24,8 @@ urlpatterns = [
     path('discussion/comment/<int:pk>', views.add_comment_to_discussion, name='add_comment_to_discussion'),
     path('discussion/comment/<int:pk>/approve/', views.comment_discussion_approve, name='comment_discussion_approve'),
     path('discussion/comment/<int:pk>/remove/', views.comment_discussion_remove, name='comment_discussion_remove'),
-    path('index/', views.navbar, name='list_event'),
+    path('event/join/<int:pk>', views.Joinevent.as_view(), name='join_event'),
+    path('event/left/<int:pk>',views.LeaveEvent.as_view(),name='leave'),
+    path('index/', views.index, name='list_event'),
 
 ]

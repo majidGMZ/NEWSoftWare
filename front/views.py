@@ -8,7 +8,7 @@ from django.db.models import Sum
 class Front:
     def SpacesList(self):
         spaces = Spaces.objects.all()
-        return render(self, 'Spaces.html', {'spaces': spaces})
+        return render(self, 'account/Spaces.html', {'spaces': spaces})
 
 
     def Space(self):
@@ -18,4 +18,4 @@ class Front:
         mrank = rank['rank__sum']
         if mrank is None:
             mrank = 0
-        return render(self, 'SingleSpace.html', {'space': space[0], 'comments': comments, 'rank': mrank})
+        return render(self, 'account/SingleSpace.html', {'space': space[0], 'comments': comments, 'rank': mrank})

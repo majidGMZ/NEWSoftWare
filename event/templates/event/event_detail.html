@@ -8,6 +8,18 @@
    deta_to:{{object.jdate_to }}
 
 </p>
+<h1>Member count: {{ object.members.count }}</h1>
+
+  {% if user in object.members.all %}
+      <a href="{% url 'event:leave' pk=object.pk %}"
+      > Leave</a>
+  {% else %}
+        <a href="{% url 'event:join_event' pk=object.pk %}"
+
+      >Join</a>
+
+{% endif %}
+
 
 <h3>comment:</h3>
 {% for comment in object.comments.all  %}
