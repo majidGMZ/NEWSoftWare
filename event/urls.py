@@ -5,13 +5,13 @@ app_name = "event"
 
 urlpatterns = [
     path('event/', views.EventListView, name='list_event'),
-    path('event/<int:pk>/', views.EventDetailView.as_view(), name='detail'),
+   # path('event/<int:pk>/', views.EventDetailView.as_view(), name='detail'),
     path('event/s/<int:pk>/', views.CommentOneEventDetailView.as_view(), name='comment_detail'),
     path('event/create/', views.EventCreateView.as_view(), name='event_create'),
     path('event/<int:pk>/update/', views.EventUpdateView.as_view(), name='event_update'),
-    path('event/home/search/', views.EventDetailView.as_view(), name='event_search'),
+   # path('event/home/search/', views.EventDetailView.as_view(), name='event_search'),
     path('event/home/', views.HomePageView.as_view(), name='home'),
-    path('event/home/search/<int:pk>/', views.EventDetailView.as_view(), name='detail_search'),
+    path('event/search/', views.SearchResultsView.as_view(), name='list_spa_city'),
     path('event/<int:id>/remove/', views.EventDeleteView.as_view(), name='event_delete'),
     path('event/<int:pk>/comment/', views.add_comment_to_post, name='add_comment_to_post'),
     path('event/comment/<int:pk>/approve/', views.comment_approve, name='comment_approve'),
