@@ -9,4 +9,7 @@
         <h2>Accepted by host : {{ booked.AcceptanceByHost }}</h2>
     </div>
 
+    <p><a href="{% url 'placeandbooking:acceptance' pk=booked.pk %}"> Accept </a></p>
+    <p><a href="{% url 'placeandbooking:reject' pk=booked.pk %}"> reject </a></p>
+
 {% endblock %}

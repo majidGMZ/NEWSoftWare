@@ -1,0 +1,12 @@
+<h1>Search Results</h1>
+
+<ul>
+  {% for event in object_list %}
+    <li>
+      <h1> <a href="{{ event.id }}" >{{ event.title}}</a> </h1>
+     <p>city: {{ event.city }}</p>
+    </li>
+  {% endfor %}
+</ul>
+
+

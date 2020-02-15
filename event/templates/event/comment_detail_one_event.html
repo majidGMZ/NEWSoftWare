@@ -1,0 +1,5 @@
+{% for comment in object.comments.all  %}
+<p>{{ comment.username}}</p>
+  <p> text:   {{ comment.text }}
+     date_left:  {{ comment.created_date }}</p>
+{% endfor %}

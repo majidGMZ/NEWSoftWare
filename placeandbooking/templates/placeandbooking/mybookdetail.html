@@ -1,0 +1,14 @@
+{% extends "placeandbooking/base.html" %}
+{% block body_block %}
+
+    <div>
+        <h1>Booking No.{{ booked.id }}:</h1>
+        <h2>place : {{ booked.place.Address }}</h2>
+        <h2>Arrival : {{ booked.Arrival }}</h2>
+        <h2>Departure : {{ booked.Depart }}</h2>
+        <h2>Accepted by host : {{ booked.AcceptanceByHost }}</h2>
+    </div>
+
+    <p><a href="{% url 'placeandbooking:reject' pk=booked.pk %}"> Delete </a></p>
+
+{% endblock %}

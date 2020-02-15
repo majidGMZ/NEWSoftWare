@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+
+from django.conf.global_settings import EMAIL_USE_TLS, AUTH_USER_MODEL
+
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -37,7 +42,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'placeandbooking'
+
+
+    'account',
+    'login_required',
+    'front',
+    'panel',
+    'placeandbooking',
+
 ]
 
 MIDDLEWARE = [
@@ -46,11 +58,18 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'login_required.middleware.LoginRequiredMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'SoftWare.urls'
+
+#login_ignored_pages
+LOGIN_REQUIRED_IGNORE_VIEW_NAMES = [
+    'login',
+    'signup',
+]
 
 TEMPLATES = [
     {
@@ -68,8 +87,19 @@ TEMPLATES = [
         },
     },
 ]
-
+AUTH_USER_MODEL = 'account.Account'
 WSGI_APPLICATION = 'SoftWare.wsgi.application'
+
+# fill this params
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+
+
+EMAIL_HOST_USER = 'mammadiu@gmail.com'
+EMAIL_HOST_PASSWORD = 'mammad1234'
+
 
 
 # Database
@@ -82,7 +112,7 @@ DATABASES = {
     }
 }
 
-
+AUTH_USER_MODEL='account.Account'
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
