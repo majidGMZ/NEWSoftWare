@@ -18,7 +18,9 @@ Including another URLconf
 # second comment for test2 commit
 
 from django.contrib import admin
-from django.urls import path, include
+
+from django.urls import path,include
+
 from account.views import Auth
 from panel.views import Panel
 from front.views import Front
@@ -29,3 +31,4 @@ urlpatterns = [
     path('f/', include('event.urls'), name='event_project'),
     path('',include('account.urls'), name = 'account_url')
 ]
+

@@ -43,19 +43,24 @@ class Account(AbstractBaseUser):
     language = models.TextField(verbose_name='language', default="")
     about = models.TextField(verbose_name='about', default="")
     interest = models.TextField(verbose_name='interest', default="")
+
     birthday = models.DateField(default=None, null=True)
+
     link = models.TextField(verbose_name='link', default="")
     is_verified = models.BooleanField(verbose_name='is_verified', default=False)
 
     civ = models.TextField(verbose_name='civ', default="")
     cil = models.TextField(verbose_name='cil', default="")
+
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
+
     REQUIRED_FIELDS = ['username', ]
+
 
     objects = MyAccountManager()
 
@@ -87,3 +92,4 @@ class Comments(models.Model):
     space_id = models.IntegerField()
     comment = models.TextField('comment', default="")
     user_id = models.IntegerField()
+
