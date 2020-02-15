@@ -1,0 +1,16 @@
+
+
+<h1>well com to list of event</h1>
+<ol>
+
+    {% for a in event_all%}
+      <h1> <a href="{{ a.id }}" >{{ a.title}}</a> </h1>
+        <p>username: {{a.username}}</p>
+        <p>city: {{ a.city }}</p>
+        <a href="{% url 'event:detail' pk=a.pk %}">Comments: {{ a.comments.count }}</a>
+        <form action="./join" method="get">
+        <input type="text" name="eventpk" value="{{ a.pk }}">
+        <input type="submit" value="join" >
+        </form>
+    {% endfor %}
+</ol>

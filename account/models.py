@@ -1,7 +1,7 @@
-
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+
 
 class MyAccountManager(BaseUserManager):
     def create_user(self, email, username, password=None):
@@ -44,7 +44,7 @@ class Account(AbstractBaseUser):
     about = models.TextField(verbose_name='about', default="")
     interest = models.TextField(verbose_name='interest', default="")
 
-    birthday = models.DateField(default=None,null=True)
+    birthday = models.DateField(default=None, null=True)
 
     link = models.TextField(verbose_name='link', default="")
     is_verified = models.BooleanField(verbose_name='is_verified', default=False)
@@ -53,14 +53,13 @@ class Account(AbstractBaseUser):
     cil = models.TextField(verbose_name='cil', default="")
 
     is_admin = models.BooleanField(default=False)
-
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
 
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = ['username', ]
 
 
     objects = MyAccountManager()
@@ -93,3 +92,4 @@ class Comments(models.Model):
     space_id = models.IntegerField()
     comment = models.TextField('comment', default="")
     user_id = models.IntegerField()
+
