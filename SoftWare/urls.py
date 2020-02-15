@@ -26,6 +26,7 @@ from front.views import Front
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('placeandbooking.urls'), name= 'bookingplace'),
+
     path('accounts/login', Auth.login, name = 'login'),
     path('accounts/signup', Auth.singup, name = 'signup'),
     path('panel/submit_item', Panel.submit_item, name = 'submit_item'),
@@ -34,9 +35,11 @@ urlpatterns = [
     path('panel/profile', Panel.profile, name = 'profile'),
     path('panel/verify', Panel.profile, name = 'verify'),
     path('panel/submit_comment', Panel.submit_comment, name = 'submit_comment'),
+
     path('like', Panel.like),
     path('dislike', Panel.dislike),
     path('panel', Panel.home),
     path('spaces', Front.SpacesList),
     path('space', Front.Space),
+
 ]
