@@ -1,0 +1,16 @@
+{% extends "placeandbooking/base.html" %}
+{% block body_block %}
+
+
+    <h1>
+    List of places you can rent:
+        <ol>
+            {% for place in places %}
+            <h2>
+                <a href="{{ place.id }}"> {{ place.City }}</a>
+            </h2>
+            {% endfor %}
+        </ol>
+    </h1>
+
+{% endblock %}

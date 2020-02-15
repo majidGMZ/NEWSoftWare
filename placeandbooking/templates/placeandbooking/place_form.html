@@ -1,0 +1,16 @@
+{% extends "placeandbooking/base.html" %}
+{% block body_block %}
+
+    <h1>
+        {% if not new_place %}
+        Add your place
+        {% endif %}
+    </h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Register my place" >
+    </form>
+
+{% endblock %}

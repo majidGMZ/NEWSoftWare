@@ -1,0 +1,13 @@
+{% extends "placeandbooking/base.html" %}
+{% block body_block %}
+
+    <h1>Results:</h1>
+    <ul>
+        {% for place in object_list %}
+        <li>
+            <h3><a href="{{ place.id }}">{{ place.Address }}</a></h3>
+        </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
