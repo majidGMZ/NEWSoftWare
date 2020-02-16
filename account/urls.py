@@ -6,13 +6,14 @@ from front.views import  Front
 app_name = "account"
 
 urlpatterns = [
-    path('accounts/login', Auth.login),
-    path('accounts/signup', Auth.singup),
-    path('panel/submit_item', Panel.submit_item),
-    path('panel/delete_item', Panel.delete_item),
-    path('panel/edit_item', Panel.delete_item),
-    path('panel/profile', Panel.profile),
-    path('panel/verify', Panel.profile),
+    path('accounts/login', Auth.login, name = 'login'),
+    path('accounts/signup', Auth.singup, name = 'signup'),
+    path('accounts/logout', Auth.logout, name = 'logout'),
+    path('panel/submit_item', Panel.submit_item, name = 'submit'),
+    path('panel/delete_item', Panel.delete_item,name = 'delete'),
+    path('panel/edit_item', Panel.delete_item, name = 'edit'),
+    path('panel/profile', Panel.profile, name = 'profile'),
+    path('panel/verify', Panel.profile, name = 'verify'),
     path('panel/submit_comment', Panel.submit_comment),
     path('like', Panel.like),
     path('dislike', Panel.dislike),
