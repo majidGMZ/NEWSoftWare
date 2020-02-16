@@ -13,9 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 
-from django.conf.global_settings import EMAIL_USE_TLS, AUTH_USER_MODEL
-
-
+from django.conf.global_settings import EMAIL_USE_TLS, AUTH_USER_MODEL, LOGIN_URL
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -43,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-
+    'event',
     'account',
     'login_required',
     'front',
@@ -67,9 +65,10 @@ ROOT_URLCONF = 'SoftWare.urls'
 
 #login_ignored_pages
 LOGIN_REQUIRED_IGNORE_VIEW_NAMES = [
-    'login',
-    'signup',
+    'account:login',
+    'account:signup',
 ]
+
 
 TEMPLATES = [
     {

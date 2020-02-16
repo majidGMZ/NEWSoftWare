@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V17</title>
+	<title>Sign up</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -35,11 +35,11 @@
 			<div class="wrap-login100">
 				<form method="post" class="login100-form validate-form">
 					<span class="login100-form-title p-b-34">
-						Account Login
+						Create Account
 					</span>
+                    {% csrf_token %}
+					<div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20">
 
-					<div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Type user name">
-                        {% csrf_token %}
 						<input type="email" name="email" autofocus="" required="" id="id_email" maxlength="255" class="input100" placeholder="Email">
 						<span class="focus-input100"></span>
 
@@ -47,37 +47,50 @@
                     <br>
 
 
-                    <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Type user name">
-                            <input type="text" name="username" maxlength="30" required="" id="id_username" autofocus="" maxlength="255" class="input100" placeholder="Username">
+                    <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20">
+                            <input type="text" name="username" maxlength="30" required="" id="id_username" class="input100" placeholder="Username">
                             <span class="focus-input100"></span>
                     </div>
 
 
 
-					<div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20" data-validate="Type password">
-						<input name="password" maxlength="255" required="" id="id_password" class="input100" type="password" placeholder="Password">
+                    <div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20">
+						<input type="password" name="password1" autocomplete="new-password" required="" id="id_password1" class="input100" placeholder="Password">
 						<span class="focus-input100"></span>
 					</div>
 
+                    <div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20">
+						<input type="password" name="password2" autocomplete="new-password" required="" id="id_password2" class="input100" placeholder="Confirm Password">
+						<span class="focus-input100"></span>
+					</div>
+
+
+                    <div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20">
+						<input type="date" name="birthday" required="" id="id_birthday" class="input100">
+						<span class="focus-input100"></span>
+					</div>
+
+
+
+
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Sign in
+						<button type="submit" class="login100-form-btn">
+							Sign Up
 						</button>
 					</div>
 
 					<div class="w-full text-center p-t-27 p-b-239">
 						<span class="txt1">
-							Forgot
+
 						</span>
 
 						<a href="#" class="txt2">
-							User name / password?
 						</a>
 					</div>
 
 					<div class="w-full text-center">
-						<a href="#" class="txt3">
-							Sign Up
+						<a href="{% url 'account:login' %}" class="txt3">
+							Login
 						</a>
 					</div>
 				</form>
@@ -189,57 +202,57 @@
 
 
 
-<form method="post">
-                <input type="hidden" name="csrfmiddlewaretoken" value="xniCLNRyEphkO9wJyvvVSI0m65bBYuUd2ubXoDABYX1Jw978NYnUBQYg1fT4DaG4">
-
-                  <p>
-                    <label for="id_email">Email:</label><br>
-                  </p><div style="position: relative;">
-                    <input type="email" name="email" autofocus="" required="" id="id_email">
-                  </div>
-
-
-                  <p></p>
-
-                  <p>
-                    <label for="id_username">Username:</label><br>
-                  </p><div style="position: relative;">
-                    <input type="text" name="username" maxlength="30" required="" id="id_username">
-                  </div>
-
-
-                  <p></p>
-
-                  <p>
-                    <label for="id_password1">Password:</label><br>
-                  </p><div style="position: relative;">
-                    <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1">
-                  </div>
-
-                      <small style="color: grey"><ul><li>Your password can’t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can’t be a commonly used password.</li><li>Your password can’t be entirely numeric.</li></ul></small>
-
-
-                  <p></p>
-
-                  <p>
-                    <label for="id_password2">Password confirmation:</label><br>
-                  </p><div style="position: relative;">
-                    <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2">
-                  </div>
-
-                      <small style="color: grey">Enter the same password as before, for verification.</small>
-
-
-                  <p></p>
-
-                  <p>
-                    <label for="id_birthday">Birthday:</label><br>
-                  </p><div style="position: relative;">
-                    <input type="text" name="birthday" required="" id="id_birthday">
-                  </div>
-
-
-                  <p></p>
-
-                <button type="submit">Sign up</button>
-              </form>
+{#<form method="post">#}
+{#                <input type="hidden" name="csrfmiddlewaretoken" value="xniCLNRyEphkO9wJyvvVSI0m65bBYuUd2ubXoDABYX1Jw978NYnUBQYg1fT4DaG4">#}
+{##}
+{#                  <p>#}
+{#                    <label for="id_email">Email:</label><br>#}
+{#                  </p><div style="position: relative;">#}
+{#                    <input type="email" name="email" autofocus="" required="" id="id_email">#}
+{#                  </div>#}
+{##}
+{##}
+{#                  <p></p>#}
+{##}
+{#                  <p>#}
+{#                    <label for="id_username">Username:</label><br>#}
+{#                  </p><div style="position: relative;">#}
+{#                    <input type="text" name="username" maxlength="30" required="" id="id_username">#}
+{#                  </div>#}
+{##}
+{##}
+{#                  <p></p>#}
+{##}
+{#                  <p>#}
+{#                    <label for="id_password1">Password:</label><br>#}
+{#                  </p><div style="position: relative;">#}
+{#                    <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1">#}
+{#                  </div>#}
+{##}
+{#                      <small style="color: grey"><ul><li>Your password can’t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can’t be a commonly used password.</li><li>Your password can’t be entirely numeric.</li></ul></small>#}
+{##}
+{##}
+{#                  <p></p>#}
+{##}
+{#                  <p>#}
+{#                    <label for="id_password2">Password confirmation:</label><br>#}
+{#                  </p><div style="position: relative;">#}
+{#                    <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2">#}
+{#                  </div>#}
+{##}
+{#                      <small style="color: grey">Enter the same password as before, for verification.</small>#}
+{##}
+{##}
+{#                  <p></p>#}
+{##}
+{#                  <p>#}
+{#                    <label for="id_birthday">Birthday:</label><br>#}
+{#                  </p><div style="position: relative;">#}
+{#                    <input type="text" name="birthday" required="" id="id_birthday">#}
+{#                  </div>#}
+{##}
+{##}
+{#                  <p></p>#}
+{##}
+{#                <button type="submit">Sign up</button>#}
+{#              </form>#}

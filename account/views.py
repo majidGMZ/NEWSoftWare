@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from account.forms import UserCreationForm, LoginForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse, HttpResponseRedirect
 # Create your views here.
 from django.shortcuts import render
@@ -18,7 +18,6 @@ from django.db.models import Sum
 import string
 
 
-
 class Auth:
     def singup(self):
         if self.method == 'POST':
@@ -27,7 +26,6 @@ class Auth:
                 email = form.cleaned_data.get('email')
                 username = form.cleaned_data.get('username')
 
-                
                 raw_password = form.cleaned_data.get('password')
                 digits = "".join([random.choice(string.digits + string.ascii_letters) for i in range(10)])
                 email = EmailMessage('Hello', 'http://localhost:8000/panel/verify?link=' + digits,
@@ -37,14 +35,13 @@ class Auth:
                 form.link = digits
                 form.save()
                 user = authenticate(username=username, password=raw_password)
-                #login(self, user)
-                #user.save()
+                # login(self, user)
+                # user.save()
                 return HttpResponseRedirect('/accounts/login')
         else:
             form = UserCreationForm()
 
         return render(self, 'account/signup.html', {'form': form})
-
 
     def login(self):
         if self.method == 'POST':
@@ -66,5 +63,8 @@ class Auth:
         else:
             form = LoginForm()
 
-            return render(self, 'login.html', {'form': form})
+            return render(self, 'account/login.html', {'form': form})
 
+    def logout(self):
+        logout(self)
+        return redirect('/accounts/login')
