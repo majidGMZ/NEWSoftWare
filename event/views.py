@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, TemplateView, DeleteView, RedirectView
 from . import models
 from .forms import EventModelForm, CommentModelForm, DiscussionModelForm, CommentDiscussionModelForm
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from account.models import Account
 from django.utils import timezone
 
@@ -26,10 +26,11 @@ def EventListView(request):
 # return events_list
 # wecan change this name to  context_object_name= 'eventss'
 #
-class EventDetailView(ListView):
-    context_object_name = 'event_detail'
+
+class EventDetailView(DetailView):
+    context_object_name = 'event'
     queryset = models.Events.objects.all()
-    template_name = 'mainProject/show_event_list.html'
+    template_name = 'event/event_detail.html'
 
 
 
@@ -44,6 +45,7 @@ class EventCreateView(CreateView):
     form_class = EventModelForm
     queryset = models.Events.objects.all()
     template_name = 'event/event_create.html'
+    success_url = reverse_lazy('event:list_event')
 
     # success_url = '/'
 
@@ -64,15 +66,13 @@ class HomePageView(TemplateView):
     template_name = 'event/event_home_search.html'
 
 
-##inja
-
 class SearchResultsView(ListView):
     model = models.Events
     template_name = 'mainProject/show_event_list.html'
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        object_list = models.Events.objects.filter(city__icontains=query)
+        object_list = models.Events.objects.filter(city=query)
         return object_list
 
 
@@ -112,6 +112,7 @@ def comment_approve(request, pk):
 
 
 def add_comment_to_post(request, pk):
+    print('olkijuujjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj', pk)
     event = get_object_or_404(models.Events, pk=pk)
     if request.method == "POST":
         form = CommentModelForm(request.POST)
@@ -123,7 +124,7 @@ def add_comment_to_post(request, pk):
             comment.event = event
 
             comment.save()
-            return redirect('event:detail', pk=event.pk)
+            return redirect('event:event_detail', pk=event.pk)
     else:
         form = CommentModelForm()
     return render(request, 'event/add_comment_to_post.html', {'form': form})
@@ -133,14 +134,14 @@ def add_comment_to_post(request, pk):
 def comment_approve(request, pk):
     comment = get_object_or_404(models.Comment, pk=pk)
     comment.approve()
-    return redirect('event:detail', pk=comment.event.pk)
+    return redirect('event:event_detail', pk=comment.event.pk)
 
 
 @login_required
 def comment_remove(request, pk):
     comment = get_object_or_404(models.Comment, pk=pk)
     comment.delete()
-    return redirect('event:detail', pk=comment.event.pk)
+    return redirect('event:event_detail', pk=comment.event.pk)
 
 
 ########discussion#########
@@ -156,11 +157,12 @@ class DiscussionCreateView(CreateView):
         return super().form_valid(form)
 
 
-def DicussionListView(request, city):
+def DiscussionListView(self, request):
+    account = Account.objects.get(pk=self.request.user.pk)
     event_list = {
-        "event_all": models.Discussion.objects.filter(city=city)
+        "discuttion_all": models.Discussion.objects.filter(city=account.wigu)
     }
-    return render(request, "discussion/discussion_list.html", event_list)
+    return render(request, "mainProject/home.html", event_list)
 
 
 class DiscussionDetailView(DetailView):
@@ -281,30 +283,41 @@ class Events_I_joined(ListView):
 
 class LeaveEvent(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
-        #return reverse('event:event_search', kwargs={'pk': self.kwargs.get('pk')})
+        # return reverse('event:event_search', kwargs={'pk': self.kwargs.get('pk')})
         return reverse('event:home')
 
     def get(self, *args, **kwargs):
         try:
-         membership = models.MemberEvent.objects.filter(
-             account=self.request.user,
-             event__pk=self.kwargs.get('pk')
-         ).get()
+            membership = models.MemberEvent.objects.filter(
+                account=self.request.user,
+                event__pk=self.kwargs.get('pk')
+            ).get()
         except models.MemberEvent.DoesNotExist:
             HttpResponse("<h1> jjjfjfrj</h1>")
 
         else:
-             membership.delete()
-             HttpResponse("<h1> delete</h1>")
-
-
+            membership.delete()
+            HttpResponse("<h1> delete</h1>")
 
         return super().get(request, *args, **kwargs)
 
 
-
 def index(request):
-    event_list = {
-        "event_all": models.Events.objects.all()
+    account = request.user
+    city = account.wigu
+    discussion_list = {
+        'discussion_list': models.Discussion.objects.filter(city__icontains=city)
     }
-    return render(request, "mainProject/home.html", event_list)
+
+    return render(request, "mainProject/home.html",discussion_list)
+
+
+class SearchDiscussion(ListView):
+    model = models.Discussion
+    template_name = 'mainProject/home.html'
+
+    def get_queryset(self):
+        account = self.request.user
+        query = account.wigu
+        object_list = models.Discussion.objects.filter(city__icontains=query)
+        return object_list

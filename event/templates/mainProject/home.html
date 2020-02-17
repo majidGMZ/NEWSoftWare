@@ -20,10 +20,12 @@
 
  <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
   <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+ <a href="{% url 'event:list_event' %}" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-bug w3-xxlarge"></i></a>
 
-  <a href="{% url 'event:list_event' %}" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-bug w3-xxlarge"></i></a>
-  <a href="{% url 'account:profile' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Profile"><i class="fa fa-user"></i></a>
-  <a href="{% url 'account:logout' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Sign out"><i class="fa fa-sign-out fa-lg"></i></a>
+        <a href="{% url 'account:profile' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+           title="Account Settings"><i class="fa fa-user"></i></a>
+        <a href="{% url 'account:logout' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Sign out"><i
+                class="fa fa-sign-out fa-lg"></i></a>
   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
 
   <!--  <img src="/w3images/avatar2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar"> -->
@@ -42,94 +44,71 @@
 
 <!-- Page Container -->
 <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
-    <!-- The Grid -->
-    <div class="w3-row">
-        <!-- Left Column -->
-        <div class="w3-col m3">
-            <!-- Profile -->
-            <div class="w3-card w3-round w3-white">
-                <div class="w3-container">
-                    <h4 class="w3-center">My Profile</h4>
-                    <p class="w3-center"><img src="/w3images/avatar3.png" class="w3-circle"
-                                              style="height:106px;width:106px" alt="Avatar"></p>
-                    <hr>
-                    <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> {{ user.education }}</p>
-                    <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> {{ user.wigu }}</p>
-                    <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{ user.birthday }}</p>
-                </div>
-            </div>
-            <br>
 
-            <!-- Accordion -->
-            <div class="w3-card w3-round">
-                <div class="w3-white">
-                    <a href="{% url 'placeandbooking:person_place' %}" style="text-decoration: none">
-                        <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i
-                                class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My House
-                        </button>
-                    </a>
+  <!-- The Grid -->
+  <div class="w3-row">
+    <!-- Left Column -->
+    <div class="w3-col m3">
+      <!-- Profile -->
+      <div class="w3-card w3-round w3-white">
+        <div class="w3-container">
+         <h4 class="w3-center">My Profile</h4>
+         <p class="w3-center"><img src="/w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+         <hr>
+         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> {{ user.education }}</p>
+         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> {{ user.wigu }}</p>
+         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{ user.birthday }}</p>
+        </div>
+      </div>
+      <br>
 
-                    <a href="#" style="text-decoration: none">
-                        <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i
-                                class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My Events
-                        </button>
-                    </a>
-                    <div id="Demo2" class="w3-hide w3-container">
-                        <p>Some other text..</p>
-                    </div>
-                    <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i
-                            class="fa fa-users fa-fw w3-margin-right"></i> My Guests
-                    </button>
-                    <div id="Demo3" class="w3-hide w3-container">
-                        <div class="w3-row-padding">
-                            <br>
-                            <div class="w3-half">
-                                <img src="/w3images/lights.jpg" style="width:100%" class="w3-margin-bottom">
-                            </div>
-                            <div class="w3-half">
-                                <img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
-                            </div>
-                            <div class="w3-half">
-                                <img src="/w3images/mountains.jpg" style="width:100%" class="w3-margin-bottom">
-                            </div>
-                            <div class="w3-half">
-                                <img src="/w3images/forest.jpg" style="width:100%" class="w3-margin-bottom">
-                            </div>
-                            <div class="w3-half">
-                                <img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
-                            </div>
-                            <div class="w3-half">
-                                <img src="/w3images/snow.jpg" style="width:100%" class="w3-margin-bottom">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br>
-            <div class="w3-card w3-round w3-white w3-center">
-                <div class="w3-container">
+      <!-- Accordion -->
+      <div class="w3-card w3-round">
+        <div class="w3-white">
+          <a href="#" style="text-decoration: none"> <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My House</button></a>
 
-                    <form method="get" action="/event">
-                        <p>
-                            <button class="w3-button w3-block w3-theme-l4">Create New Event</button>
-                        </p>
-                    </form>
+          <a href="#" style="text-decoration: none"><button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My Events </button></a>
+          <div id="Demo2" class="w3-hide w3-container">
+            <p>Some other text..</p>
+          </div>
+          <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> My Guests</button>
+          <div id="Demo3" class="w3-hide w3-container">
+         <div class="w3-row-padding">
+         <br>
+           <div class="w3-half">
+             <img src="/w3images/lights.jpg" style="width:100%" class="w3-margin-bottom">
+           </div>
+           <div class="w3-half">
+             <img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
+           </div>
+           <div class="w3-half">
+             <img src="/w3images/mountains.jpg" style="width:100%" class="w3-margin-bottom">
+           </div>
+           <div class="w3-half">
+             <img src="/w3images/forest.jpg" style="width:100%" class="w3-margin-bottom">
+           </div>
+           <div class="w3-half">
+             <img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
+           </div>
+           <div class="w3-half">
+             <img src="/w3images/snow.jpg" style="width:100%" class="w3-margin-bottom">
+           </div>
+         </div>
+          </div>
+        </div>
+      </div>
+      <br>
+          <div class="w3-card w3-round w3-white w3-center">
+        <div class="w3-container">
 
-                    <form method="get" action="/discussion/create">
-                        <p>
-                            <button class="w3-button w3-block w3-theme-l4">Create New Discussion</button>
-                        </p>
-                    </form>
+            <form method="get" action="{% url 'event:event_create' %}">
+              <p><button class="w3-button w3-block w3-theme-l4">Create New Event</button></p>
+              </form>
+             <form method="get" action="/discussion/create">
+                <p><button class="w3-button w3-block w3-theme-l4">Create New Discussion</button></p>
+            </form>
 
-                    <a href="#" style="text-decoration: none">
-                        <p>
-                            <a style="text-decoration: none" href="{% url 'placeandbooking:newplace' %}"><button class="w3-button w3-block w3-theme-l4">Create New Place</button></a>
-                        </p>
-                    </a>
-
-
-                </div>
-            </div>
+            <a href="#" style="text-decoration: none"><p><button class="w3-button w3-block w3-theme-l4">Create New Place</button></p></a>
 
             <!-- Interests -->
             {#      <div class="w3-card w3-round w3-white w3-hide-small">#}
@@ -191,15 +170,40 @@
                     aliquip ex ea commodo consequat.</p>
                 <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"> Show This Profile</button>
             </div>
-            <!-- Middle Column Disscusion-->
-            <div class="w3-row-padding">
-                <div class="w3-col m12">
-                    <div class="w3-card w3-round w3-theme-l1">
-                        <div class="w3-container w3-padding">
-                            <p class="w3-large ">Discussion</p>
-                        </div>
-                    </div>
-                </div>
+
+          </div>
+        </div>
+      </div>
+{#          {% for a in event_all%}#}
+{#      <h1> <a href="{% url 'event:discussion_detail' pk=a.pk %}" >{{ a.title}}</a> </h1>#}
+{#        <p>username: {{a.username}}</p>#}
+{#        <p>city: {{ a.city }}</p>#}
+{#        <a href="{% url 'event:discussion_detail' pk=a.pk %}">Comments: {{ a.comments_discussion.count}}</a>#}
+{#    {% endfor %}#}
+
+     {% for dis in discussion_list %}
+           <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+        <img src="/w3images/avatar5.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+        <span class="w3-right w3-opacity">{{ dis.created_date}}</span>
+        <h4>{{dis.account}}</h4><br>
+        <hr class="w3-clear">
+        <p>{{ dis.text }}</p>
+               <a href="{% url 'event:discussion_detail' pk=dis.pk  %} "><button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"> Show detail</button></a>
+      </div>
+         {% empty %}
+    <p>No comments here yet :(</p>
+     {% endfor %}
+
+
+
+
+        <div class="w3-row-padding">
+        <div class="w3-col m12">
+          <div class="w3-card w3-round w3-white">
+            <div class="w3-container w3-padding">
+              <h6 class="w3-opacity">Social Media template by w3.css</h6>
+              <p contenteditable="true" class="w3-border w3-padding">Status: Feeling Blue</p>
+              <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button>
             </div>
 
 

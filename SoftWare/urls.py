@@ -30,6 +30,7 @@ from front.views import Front
 
 
 urlpatterns = [
+
     path('admin/', admin.site.urls, name = 'admin'),
     path('', include('placeandbooking.urls'), name='bookingplace'),
     path('', include('event.urls'), name='event_project'),

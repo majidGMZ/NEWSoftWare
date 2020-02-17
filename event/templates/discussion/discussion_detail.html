@@ -1,3 +1,279 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    html, body, h1, h2, h3, h4, h5 {
+        font-family: "Open Sans", sans-serif
+    }
+</style>
+<body class="w3-theme-l5">
+
+<!-- Navbar -->
+<div class="w3-top">
+    <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
+           href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+        <a href="{% url 'event:list_event' %}" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-bug w3-xxlarge"></i></a>
+
+        <a href="{% url 'account:profile' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+           title="Account Settings"><i class="fa fa-user"></i></a>
+        <a href="{% url 'account:logout' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Sign out"><i
+                class="fa fa-sign-out fa-lg"></i></a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
+           title="My Account">
+
+            <!--  <img src="/w3images/avatar2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar"> -->
+        </a>
+    </div>
+</div>
+
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+</div>
+
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
+    <!-- The Grid -->
+    <div class="w3-row">
+
+        <!-- Left Column -->
+        <div class="w3-col m3">
+            <!-- Profile -->
+
+
+            <!-- End Left Column -->  .
+
+
+        </div>
+
+        <!-- Middle Column -->
+        <div class="w3-col m7 ">
+            <div class="w3-row-padding">
+                <div class="w3-col m12">
+                    <div class="w3-card w3-round w3-theme-l1">
+                        <div class="w3-container w3-padding">
+                            <p class="w3-large ">Discussion Detail Create by {{object.account.username}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle Column  HOST-->
+{#        <p>username= {{ object.username }}</p>#}
+{#<p>#}
+{#<p>text: {{ object.text }}</p>#}
+{#title: {{ object.title|linebreaks }}#}
+{#city:  {{ object.city  |linebreaks }}#}
+{#date_from: {{ object.jdate_from }}#}
+{#deta_to:{{ object.jdate_to }}#}
+
+            <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+
+
+                <span class="w3-right w3-opacity">START : {{ object.created_date}}</span>
+                <br>
+                <h4>{{ object.title }}</h4><br>
+{#                <hr class="w3-clear">#}
+                <p>{{ object.text }}</p>
+                <a href="{% url 'event:add_comment_to_discussion' pk=object.pk %} ">
+                    <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"> Comment </button>
+                </a>
+
+
+            </div>
+
+             <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+        {% for comment in object.comments_discussion.all  %}
+  {% if user.is_authenticated or comments.approved_comment %}
+    <div class="comment">
+    <span class="w3-right w3-opacity">{{ comment.created_date }}</span>
+
+        <p> <strong>{{ comment.account.username }}</strong> : {{ comment.text}}</p>
+
+
+
+        <div class="date">
+                {% if not comment.approved_comment %}
+                    {% ifequal user comment.account %}
+                  <a class="btn btn-default" href="{% url 'event:comment_discussion_remove' pk=comment.pk %}">
+                      <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"> remove my comment</button><span
+                            class="glyphicon glyphicon-remove"></span></a>
+                <a class="btn btn-default" href="{% url 'event:comment_discussion_approve' pk=comment.pk %}">
+                    <span class="glyphicon glyphicon-ok"></span></a>
+                    {% endifequal %}
+                    <hr class="w3-clear">
+                {% endif %}
+
+            </div>
+
+        </div>
+    {% endif %}
+{% empty %}
+    <p>No comments here yet :(</p>
+{% endfor %}
+
+      </div>
+
+
+
+
+        <!-- Middle Column  Comment-->
+{##}
+{#      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>#}
+{#        {% for comment in object.comments.all %}#}
+{#        {% if user.is_authenticated or comment.approved_comment %}#}
+{#        <div class="comment">#}
+{#        <span class="w3-right w3-opacity"> {{ comment.created_date }}</span>#}
+{#        <h5>{{ comment.account.username }}</h5><br>#}
+{#        <p>{{ comment.text}}</p>#}
+{#            <div class="date">#}
+{#                {% if not comment.approved_comment %}#}
+{#                    {% ifequal user comment.account %}#}
+{#                    <a class="btn btn-default" href="{% url 'event:comment_remove' pk=comment.pk %}"><button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"> remove your account</button><span#}
+{#                            class="glyphicon glyphicon-remove"></span></a>#}
+{##}
+{#                    <a class="btn btn-default" href="{% url 'event:comment_approve' pk=comment.pk %}"><span#}
+{#                            class="glyphicon glyphicon-ok"></span></a>#}
+{#                    {% endifequal %}#}
+{#                    <hr class="w3-clear">#}
+{#                {% endif %}#}
+{##}
+{#            </div>#}
+{##}
+{#        </div>#}
+{#    {% endif %}#}
+{#{% empty %}#}
+{#    <p>No comments here yet :(</p>#}
+{#{% endfor %}#}
+{##}
+{#      </div>#}
+
+
+            <!-- End Middle Column -->
+        </div>
+
+
+        <!-- End Right Column -->
+    </div>
+
+    <!-- End Grid -->
+</div>
+
+<!-- End Page Container -->
+<br>
+
+<footer class="w3-container w3-theme-d3 w3-padding-16"
+        style="clear: both;position: relative; height: 100px; margin-top: 200px;">
+    <p><a href="http://www.airbnb.com"
+          style="display: table; text-decoration: none; text-align: center; margin-left: auto;margin-right: auto;"
+          target="_blank">Contact Us</a></p>
+
+</footer>
+
+<footer class="w3-container w3-white">
+    <p></p>
+</footer>
+
+<script>
+    // Accordion
+    function myFunction(id) {
+        var x = document.getElementById(id);
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+            x.previousElementSibling.className += " w3-theme-d1";
+        } else {
+            x.className = x.className.replace("w3-show", "");
+            x.previousElementSibling.className =
+                x.previousElementSibling.className.replace(" w3-theme-d1", "");
+        }
+    }
+
+    // Used to toggle the menu on smaller screens when clicking on the menu button
+    function openNav() {
+        var x = document.getElementById("navDemo");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+</script>
+
+</body>
+</html>
+
+{##}
+{#<h2>event detail :</h2>#}
+{#<p>username= {{ object.username }}</p>#}
+{#<p>#}
+{#<p>text: {{ object.text }}</p>#}
+{#title: {{ object.title|linebreaks }}#}
+{#city:  {{ object.city  |linebreaks }}#}
+{#date_from: {{ object.jdate_from }}#}
+{#deta_to:{{ object.jdate_to }}#}
+{##}
+{#</p>#}
+{#<h1>Member count: {{ object.members.count }}</h1>#}
+{##}
+{#{% if user in object.members.all %}#}
+{#    <a href="{% url 'event:leave' pk=object.pk %}"#}
+{#    > Leave</a>#}
+{#{% else %}#}
+{#    <a href="{% url 'event:join_event' pk=object.pk %}"#}
+{##}
+{#    >Join</a>#}
+{##}
+{#{% endif %}#}
+{##}
+{##}
+{#<h3>comment:</h3>#}
+{#{% for comment in object.comments.all %}#}
+{#    {% if user.is_authenticated or comment.approved_comment %}#}
+{#        <div class="comment">#}
+{#            <strong>{{ comment.username }}</strong>#}
+{#            <p>{{ comment.text|linebreaks }}</p>#}
+{#            {{ comment.created_date }}#}
+{#            <div class="date">#}
+{#                {% if not comment.approved_comment %}#}
+{#                    <a class="btn btn-default" href="{% url 'event:comment_remove' pk=comment.pk %}">remove your comment<span#}
+{#                            class="glyphicon glyphicon-remove"></span></a>#}
+{#                    <a class="btn btn-default" href="{% url 'event:comment_approve' pk=comment.pk %}"><span#}
+{#                            class="glyphicon glyphicon-ok"></span></a>#}
+{#                {% endif %}#}
+{#            </div>#}
+{##}
+{#        </div>#}
+{#    {% endif %}#}
+{#{% empty %}#}
+{#    <p>No comments here yet :(</p>#}
+{#{% endfor %}#}
+{##}
+{#<a class="btn btn-default" href="{% url 'event:add_comment_to_post' pk=object.pk %}">Add comment</a>#}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <h2>discussion detail :</h2>
 
 <p>username= {{ object.username }}</p>
@@ -23,7 +299,8 @@
         <div class="date">
             {% if not comment.approved_comment %}
                 <a class="btn btn-default" href="{% url 'event:comment_discussion_remove' pk=comment.pk %}">remove your comment<span class="glyphicon glyphicon-remove"></span></a>
-                <a class="btn btn-default" href="{% url 'event:comment_discussion_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+                <a class="btn btn-default" href="{% url 'event:comment_discussion_approve' pk=comment.pk %}">
+                    <span class="glyphicon glyphicon-ok"></span></a>
             {% endif %}
         </div>
 
