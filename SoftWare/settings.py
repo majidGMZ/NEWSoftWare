@@ -67,6 +67,7 @@ ROOT_URLCONF = 'SoftWare.urls'
 LOGIN_REQUIRED_IGNORE_VIEW_NAMES = [
     'account:login',
     'account:signup',
+    'admin',
 ]
 
 

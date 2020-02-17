@@ -1,14 +1,238 @@
-{% extends "placeandbooking/base.html" %}
-{% block body_block %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@5.12.1/css/all.min.css"
+          crossorigin="anonymous"/>
+    <style>
 
-    <h1>
-    {% if  not form.instance.pk%}
-    New Booking:
-    {% else %}
-        Accept Booking:
-    {% endif %}
-    </h1>
+        body {
+            background: #3f8bc9;
+        }
 
+        .container {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .container nav.navbar {
+            border: 1px solid rgba(0, 0, 0, .125);
+            border-radius: .25rem;
+        }
+
+        .avatar-container img {
+            width: 100%;
+            object-fit: cover;
+            height: 100%;
+        }
+
+        .avatar-container {
+            position: relative;
+            height: 150px;
+        }
+
+        .avatar-container .btn-action-edit {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+        }
+
+        .user-details > * {
+            border-bottom: 1px solid #dddddd;
+
+            padding-bottom: 10px !important;
+            margin-bottom: 20px !important;
+        }
+
+        .user-details > *:last-child {
+            border-bottom: none;
+
+            padding-bottom: 0 !important;
+            margin-bottom: 0 !important;
+        }
+
+        .user-details .details {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .user-details .details li {
+            margin: 0;
+            padding: 0;
+            margin-bottom: 5px;
+        }
+
+        .user-details .details li i {
+            margin-right: 5px;
+        }
+
+        .skills > div {
+            margin-bottom: 0.5rem;
+        }
+
+        .skills > div p {
+            padding: 0;
+            margin: 0;
+            margin-bottom: 5px;
+        }
+
+        .user-fullname-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-title {
+            border-bottom: 1px solid #dddddd;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        .page-profile-edit #avatar {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="page-profile-edit">
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Profile</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <form class="row" method="post">
+
+        {% if  booking %}
+            {% csrf_token %}
+            <div class="col-md-8">
+            <section id="main-content" class="profile-info card">
+            <div class="card-body">
+            <h1 class="page-title">Edit Your Place Info</h1>
+
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Send Request">
+            </form>
+
+
+        {% else %}
+            {% csrf_token %}
+            <div class="col-md-8">
+            <section id="main-content" class="profile-info card">
+            <div class="card-body">
+            <h1 class="page-title">Book Request For Place</h1>
+
+            <div class="form-group">
+                <label for="id_Arrival">Arrival</label>
+                <input type="date" name="Arrival" required="" id="id_Arrival" class="form-control"
+                       placeholder="Arrival"/>
+            </div>
+
+            <div class="form-group">
+                <label for="id_Depart">Departure</label>
+                <input type="date" name="Depart" required="" id="id_Depart" class="form-control"
+                       placeholder="Address"/>
+            </div>
+
+
+
+
+            <div class="action">
+
+
+                <button type="submit" class="btn btn-primary" value="Edit Info">Book
+                    Place
+                </button>
+
+                <a href="{% url 'event:home' %}"
+                   class="btn btn-outline-secondary">Cansel</a>
+            </div>
+
+
+
+
+        {% endif %}
+        </div>
+        </section>
+        </div>
+    </form>
+</div>
+<script>
+    var avatarImage = document.getElementById("avatar");
+    var avatarFile = document.getElementsByName('avatarFile').item(0);
+    avatarImage.onclick = function (event) {
+        avatarFile.click();
+        return false;
+    }
+    avatarFile.onchange = function (event) {
+        var tgt = event.target || window.event.srcElement,
+            files = tgt.files;
+
+        var fr = new FileReader();
+        if (FileReader && files && files.length) {
+            var fr = new FileReader();
+            fr.onload = function () {
+                avatarImage.src = fr.result;
+            }
+            fr.readAsDataURL(files[0]);
+        } else {
+            // unsupported browser/no file selected
+        }
+    }
+
+</script>
+</body>
+</html>
+
+
+{##}
+{#{% extends "placeandbooking/base.html" %}#}
+{#{% block body_block %}#}
+{##}
+{#    <h1>#}
+{#    {% if  not form.instance.pk%}#}
+{#    New Booking:#}
+{#    {% else %}#}
+{#        Accept Booking:#}
+{#    {% endif %}#}
+{#    </h1>#}
+{##}
 {#    <form method="post">#}
 {#        {% csrf_token %}#}
 {#        <p><label for="id_place">Place:</label> <input hidden name="place" id="id_place"></p>#}
@@ -16,11 +240,12 @@
 {#        <p><label for="id_Depart">Depart:</label> <input type="text" name="Depart" value="2020-02-11" required="" id="id_Depart"></p>#}
 {#        <input type="submit" value="Send Request" >#}
 {#    </form>#}
+{##}
+{#    <form method="post">#}
+{#        {% csrf_token %}#}
+{#        {{ form.as_p }}#}
+{#        <input type="submit" value="Send Request" >#}
+{#    </form>#}
+{##}
+{#{% endblock %}#}
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Send Request" >
-    </form>
-
-{% endblock %}

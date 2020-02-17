@@ -266,6 +266,15 @@ class Joinevent(RedirectView):
 
         return super().get(request, *args, **kwargs)
 
+class Events_I_joined(ListView):
+    model = models.MemberEvent
+    context_object_name = 'myevent'
+    template_name = "event/events_I_joined.html"
+
+    def get_queryset(self):
+        account = self.request.user
+        query = models.MemberEvent.objects.filter(account=account)
+        return query
 
 class LeaveEvent(RedirectView):
     def get_redirect_url(self, *args, **kwargs):

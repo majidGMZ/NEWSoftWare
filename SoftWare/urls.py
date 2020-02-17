@@ -26,9 +26,9 @@ from panel.views import Panel
 from front.views import Front
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name = 'admin'),
     path('', include('placeandbooking.urls'), name='bookingplace'),
-    path('f/', include('event.urls'), name='event_project'),
+    path('', include('event.urls'), name='event_project'),
     path('',include('account.urls'), name = 'account_url')
 ]
 

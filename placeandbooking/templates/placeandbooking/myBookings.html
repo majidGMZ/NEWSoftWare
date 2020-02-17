@@ -1,18 +1,224 @@
-{% extends "placeandbooking/base.html" %}
-{% block body_block %}
+<!DOCTYPE html>
+{% load static %}
+<html>
+<title>Place search</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    html, body, h1, h2, h3, h4, h5 {
+        font-family: "Open Sans", sans-serif
+    }
+</style>
+<body class="w3-theme-l5">
+
+<!-- Navbar -->
+<div class="w3-top">
+    <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
+           href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+        <a href="{% url 'event:list_event' %}" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-bug w3-xxlarge"></i></a>
+
+        <a href="{% url 'account:profile' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+           title="Account Settings"><i class="fa fa-user"></i></a>
+        <a href="{% url 'account:logout' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Sign out"><i
+                class="fa fa-sign-out fa-lg"></i></a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
+           title="My Account">
+
+            <!--  <img src="/w3images/avatar2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar"> -->
+        </a>
+    </div>
+</div>
+
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+</div>
+
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
+    <!-- The Grid -->
+    <div class="w3-row">
+
+        <!-- Left Column -->
+        <div class="w3-col m3">
+            <!-- Profile -->
+
+
+            <!-- End Left Column --> .
+
+
+        </div>
+
+        <!-- Middle Column -->
+        <div class="w3-col m7 ">
+            <div class="w3-row-padding">
+                <div class="w3-col m12">
+                    <div class="w3-card w3-round w3-theme-l1">
+                        <div class="w3-container w3-padding">
+                            <p class="w3-large ">My Bookings</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle Column  HOST-->
 
 
 
+            {% for book in books %}
+                <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+                    <span class="w3-right w3-opacity"> Capacity: {{ book.place.Capacity }} </span>
+                    <h4>{{ book.account.username }}</h4><br>
+                    <hr class="w3-clear">
+                    <p>you would like to use {{ book.account.username }}`s home from {{ book.Arrival }} to {{ book.Depart }} !.</p>
+                    {% if not book.AcceptanceByHost %}
+                    <a href="{% url 'placeandbooking:reject' pk=book.pk %}" style="text-decoration: none">
+                        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"> Delete request</button>
+                    </a>
+                    {% else %}
+                        <p>Your request accepted by host</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
 
 
-    <h1>Results:</h1>
-    <ul>
-        {% for book in books %}
-        <li>
-            <h3><a href="{{ book.id }}">{{ book.id }}</a></h3>
-        </li>
-        {% endfor %}
-    </ul>
+            <!-- Middle Column Disscusion-->
 
 
-{% endblock %}
+            <!-- End Middle Column -->
+        </div>
+
+
+        <!-- Right Column -->
+        <!-- <div class="w3-col m2">
+          <div class="w3-card w3-round w3-white w3-center">
+            <div class="w3-container">
+              <p>Find Event</p>
+              <img src="/static/event/images/search_event.JPG" alt="Forest" style="width:100%;">
+              <form class="w3-container" action="." method="get">
+                      <p>
+                      <input class="w3-input" type="text" name="event_search" placeholder="Search...">
+                      <label>Write your city</label></p>
+                  <p><button class="w3-button w3-block w3-theme-l4">Search</button></p>
+                </form>
+
+            </div>
+          </div>
+          <br>
+             <div class="w3-card w3-round w3-white w3-center">
+            <div class="w3-container">
+              <p>Find Host</p>
+              <img src="/static/event/images/search_host.JPG" alt="Forest" style="width:100%;">
+              <form class="w3-container" action="." method="get">
+                      <p>
+                      <input class="w3-input" type="text" name="host_search" placeholder="Search...">
+                      <label>Write your city</label></p>
+                  <p><button class="w3-button w3-block w3-theme-l4">Search</button></p>
+                </form>
+
+            </div>
+          </div>
+
+          <div class="w3-card w3-round w3-white w3-center">
+            <div class="w3-container">
+              <p>Friend Request</p>
+              <img src="/w3images/avatar6.png" alt="Avatar" style="width:50%"><br>
+              <span>Jane Doe</span>
+              <div class="w3-row w3-opacity">
+                <div class="w3-half">
+                  <button class="w3-button w3-block w3-green w3-section" title="Accept"><i class="fa fa-check"></i></button>
+                </div>
+                <div class="w3-half">
+                  <button class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-remove"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+
+          <div class="w3-card w3-round w3-white w3-padding-16 w3-center">
+            <p>ADS</p>
+          </div>
+          <br>
+
+          <div class="w3-card w3-round w3-white w3-padding-32 w3-center">
+            <p><i class="fa fa-bug w3-xxlarge"></i></p>
+          </div> -->
+
+        <!-- End Right Column -->
+    </div>
+
+    <!-- End Grid -->
+</div>
+
+<!-- End Page Container -->
+<br>
+
+<footer class="w3-container w3-theme-d3 w3-padding-16"
+        style="clear: both;position: relative; height: 100px; margin-top: 200px;">
+    <p><a href="http://www.airbnb.com"
+          style="display: table; text-decoration: none; text-align: center; margin-left: auto;margin-right: auto;"
+          target="_blank">Contact Us</a></p>
+
+</footer>
+
+<footer class="w3-container w3-white">
+    <p></p>
+</footer>
+
+<script>
+    // Accordion
+    function myFunction(id) {
+        var x = document.getElementById(id);
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+            x.previousElementSibling.className += " w3-theme-d1";
+        } else {
+            x.className = x.className.replace("w3-show", "");
+            x.previousElementSibling.className =
+                x.previousElementSibling.className.replace(" w3-theme-d1", "");
+        }
+    }
+
+    // Used to toggle the menu on smaller screens when clicking on the menu button
+    function openNav() {
+        var x = document.getElementById("navDemo");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+</script>
+
+</body>
+
+{##}
+{##}
+{##}
+{#{% extends "placeandbooking/base.html" %}#}
+{#{% block body_block %}#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{#    <h1>Results:</h1>#}
+{#    <ul>#}
+{#        {% for book in books %}#}
+{#        <li>#}
+{#            <h3><a href="{{ book.id }}">{{ book.id }}</a></h3>#}
+{#        </li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+{##}
+{##}
+{#{% endblock %}#}

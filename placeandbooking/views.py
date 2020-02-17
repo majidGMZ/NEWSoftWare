@@ -1,8 +1,14 @@
 # from account.views import
 # from django.contrib.auth import
+import datetime
+
+from django.http import HttpResponse
 from django.shortcuts import render
+from django.utils.timezone import localdate
 from django.views import generic
 from django.urls import reverse_lazy
+from pytz import timezone
+
 from placeandbooking import models
 from django.contrib import messages
 from account.models import Account
@@ -29,7 +35,7 @@ class CreatPlace(generic.CreateView):
               'Price',
               ]
 
-    success_url = reverse_lazy('placeandbooking:indexView')
+    success_url = reverse_lazy('event:list_event')
 
     def form_valid(self, form):
         account = Account.objects.get(pk = self.request.user.pk)
@@ -45,7 +51,7 @@ class EditPlace(generic.UpdateView):
               'Kids',
               'Price',
               ]
-    success_url = reverse_lazy('placeandbooking:indexView')
+    success_url = reverse_lazy('event:list_event')
 
 #shows all places available to rent
 class IndexPlace(generic.ListView):
@@ -73,8 +79,8 @@ class IndexPlace_for_person(generic.ListView):
 
     def get_queryset(self):
         account = self.request.user
-        place = models.Place.objects.filter(account=account)
-        return place
+        places = models.Place.objects.filter(account=account)
+        return places
 
 #show persons place detail
 class PlaceDetail_for_person(generic.DetailView):
@@ -99,6 +105,7 @@ class PlaceDetail_Search(generic.DetailView):
 class SearchResult(generic.ListView):
     models = models.Place
     template_name = 'placeandbooking/search_results.html'
+    context_object_name = 'places'
 
     def get_queryset(self):
         query = self.request.GET.get('city')
@@ -124,29 +131,34 @@ class RegisterBooking(generic.CreateView):
     fields = ['Arrival','Depart']
     context_object_name = 'booking'
     template_name = 'placeandbooking/places_requested_for_rent.html'
-    success_url = reverse_lazy('placeandbooking:indexView')
+    success_url = reverse_lazy('event:list_event')
 
     def form_valid(self, form):
-
+        today = localdate()
+        print(today)
         if form.instance.Arrival <= form.instance.Depart:
-            place = models.Place.objects.get(pk = self.kwargs['pk'])
-            form.instance.place = place
-            return super().form_valid(form)
-
+            if form.instance.Arrival >= today:
+                place = models.Place.objects.get(pk = self.kwargs['pk'])
+                form.instance.place = place
+                form.instance.account = self.request.user
+                return super().form_valid(form)
+            return HttpResponse("<h2>invalid time input</h2>")
         elif form.instance.Arrival >= form.instance.Depart:
             messages.error(self.request, "Error")
-            return super().form_invalid(form)
+            return HttpResponse("<h2>invalid time input</h2>")
 
 #show the bookings for one place
 class BookingList(generic.ListView):
     model = models.Booking
+
+    # queryset = models.Booking.objects.filter(place__account=account)
     context_object_name = 'books'
     template_name = 'placeandbooking/Bookings.html'
 
     def get_queryset(self):
         account = self.request.user
-        book = models.Booking.objects.filter(place__account=account)
-        return book
+        books = models.Booking.objects.filter(place__account=account)
+        return books
 
 class BookingDetail(generic.DetailView):
     model = models.Booking
@@ -176,11 +188,12 @@ class mybookingdetail(generic.DetailView):
 
 class HostAccept(generic.UpdateView):
     model = models.Booking
+    context_object_name = 'booking'
     fields = ['AcceptanceByHost']
     template_name = 'placeandbooking/places_requested_for_rent.html'
-    success_url = reverse_lazy('placeandbooking:indexView')
+    success_url = reverse_lazy('event:list_event')
 
 
 class HostDeleteBooking(generic.DeleteView):
     model = models.Booking
-    success_url = reverse_lazy('placeandbooking:indexView')
+    success_url = reverse_lazy('event:list_event')

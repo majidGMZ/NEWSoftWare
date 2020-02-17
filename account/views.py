@@ -54,7 +54,7 @@ class Auth:
                     if user.is_active:
                         login(self, user)
 
-                        return HttpResponseRedirect('/f/index')
+                        return HttpResponseRedirect('/index')
 
                     else:
                         return HttpResponse('Disabled account')
