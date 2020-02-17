@@ -1,16 +1,336 @@
-{% extends "placeandbooking/base.html" %}
-{% block body_block %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@5.12.1/css/all.min.css"
+          crossorigin="anonymous"/>
+    <style>
 
-    <h1>
-        {% if not new_place %}
-        Add your place
+        body {
+            background: #3f8bc9;
+        }
+
+        .container {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .container nav.navbar {
+            border: 1px solid rgba(0, 0, 0, .125);
+            border-radius: .25rem;
+        }
+
+        .avatar-container img {
+            width: 100%;
+            object-fit: cover;
+            height: 100%;
+        }
+
+        .avatar-container {
+            position: relative;
+            height: 150px;
+        }
+
+        .avatar-container .btn-action-edit {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+        }
+
+        .user-details > * {
+            border-bottom: 1px solid #dddddd;
+
+            padding-bottom: 10px !important;
+            margin-bottom: 20px !important;
+        }
+
+        .user-details > *:last-child {
+            border-bottom: none;
+
+            padding-bottom: 0 !important;
+            margin-bottom: 0 !important;
+        }
+
+        .user-details .details {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .user-details .details li {
+            margin: 0;
+            padding: 0;
+            margin-bottom: 5px;
+        }
+
+        .user-details .details li i {
+            margin-right: 5px;
+        }
+
+        .skills > div {
+            margin-bottom: 0.5rem;
+        }
+
+        .skills > div p {
+            padding: 0;
+            margin: 0;
+            margin-bottom: 5px;
+        }
+
+        .user-fullname-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-title {
+            border-bottom: 1px solid #dddddd;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        .page-profile-edit #avatar {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="page-profile-edit">
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Profile</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <form class="row" method="post">
+
+        {% if  new_place %}
+            {% csrf_token %}
+            <div class="col-md-8">
+            <section id="main-content" class="profile-info card">
+            <div class="card-body">
+            <h1 class="page-title">Edit Your Place Info</h1>
+            <div class="form-group">
+                <label>Place Description</label>
+                <textarea name="Description" cols="40" rows="10" required="" id="id_Description" class="form-control"
+                          placeholder="Description">
+                                    </textarea>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" name="Pets" id="id_Pets" class="form-check-input"
+                        {% if new_place.Pets %}
+                       checked
+                        {% else %}
+
+                        {% endif %}
+                >
+                <label class="form-check-label" for="checkfield1">
+                    Pets Allowed?
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" name="Kids" id="id_Kids" class="form-check-input"
+                 {% if new_place.Kids %}
+                       checked
+                        {% else %}
+
+                        {% endif %}
+                >
+                <label class="form-check-label" for="checkfield1">
+                    Kids Allowed?
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" name="SmokingAllowed" id="id_SmokingAllowed" class="form-check-input"
+                        {% if new_place.SmokingAllowed %}
+                       checked
+                        {% else %}
+
+                        {% endif %}>
+                <label class="form-check-label" for="checkfield1">
+                    Smoking Allowed?
+                </label>
+            </div>
+
+
+            <div class="action">
+
+                <a href="{% url 'placeandbooking:person_place_detail' pk=new_place.pk %}">
+                    <button type="submit" class="btn btn-primary" value="Edit Info"><i class="fa fa-save"></i>Save
+                        Changes
+                    </button>
+                </a>
+                <a href="{% url 'placeandbooking:person_place_detail' pk=new_place.pk %}"
+                   class="btn btn-outline-secondary"><i class="fa fa-window-close"></i> Cansel </a>
+            </div>
+
+        {% else %}
+            {% csrf_token %}
+            <div class="col-md-8">
+            <section id="main-content" class="profile-info card">
+            <div class="card-body">
+            <h1 class="page-title">Add Your Place</h1>
+
+            <div class="form-group">
+                <label for="id_City"">City</label>
+                <input type="text" name="City" maxlength="15" required="" id="id_City" class="form-control"
+                       placeholder="City"/>
+            </div>
+
+            <div class="form-group">
+                <label for="id_Address">Address</label>
+                <input type="text" name="Address" maxlength="256" required="" id="id_Address" class="form-control"
+                       placeholder="Address"/>
+            </div>
+
+            <div class="form-group">
+                <label for="id_KindofHome">Kind of Home</label>
+                <input type="text" name="KindofHome" maxlength="15" required="" id="id_KindofHome" class="form-control"
+                       placeholder="Home Kind"/>
+            </div>
+
+            <div class="form-group">
+                <label for="id_RoomType">Room Type</label>
+                <input type="text" name="RoomType" maxlength="15" required="" id="id_RoomType" class="form-control"
+                       placeholder="Room Type"/>
+            </div>
+
+            <div class="form-group">
+                <label for="id_Capacity">Capacity</label>
+                <input type="number" name="Capacity" min="0" required="" id="id_Capacity" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="id_Description">Description</label>
+                <textarea name="Description" cols="40" rows="10" required="" id="id_Description" class="form-control"></textarea>
+            </div>
+
+
+            <div class="form-check">
+                <input type="checkbox" name="Pets" id="id_Pets" class="form-check-input">
+                <label class="form-check-label" for="id_PlacePhoto">
+                    Pets Allowed
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" name="Kids" id="id_Kids" class="form-check-input">
+                <label class="form-check-label" for="id_Kids">
+                    Kids Allowed
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" name="SmokingAllowed" id="id_SmokingAllowed" class="form-check-input">
+                <label class="form-check-label" for="id_SmokingAllowed">
+                    Smoking Allowed
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label for="id_Price">Price</label>
+                <input type="number" name="Price" min="0" required="" id="id_Price" class="form-control"/>
+            </div>
+
+
+            <div class="action">
+
+
+                <button type="submit" class="btn btn-primary" value="Edit Info"><i class="fa fa-save"></i>Save
+                    Place
+                </button>
+
+                <a href="{% url 'event:home' %}"
+                   class="btn btn-outline-secondary"><i class="fa fa-window-close"></i> Cansel</a>
+            </div>
+
+
+
+
         {% endif %}
-    </h1>
-
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Register my place" >
+        </div>
+        </section>
+        </div>
     </form>
+</div>
+<script>
+    var avatarImage = document.getElementById("avatar");
+    var avatarFile = document.getElementsByName('avatarFile').item(0);
+    avatarImage.onclick = function (event) {
+        avatarFile.click();
+        return false;
+    }
+    avatarFile.onchange = function (event) {
+        var tgt = event.target || window.event.srcElement,
+            files = tgt.files;
 
-{% endblock %}
+        var fr = new FileReader();
+        if (FileReader && files && files.length) {
+            var fr = new FileReader();
+            fr.onload = function () {
+                avatarImage.src = fr.result;
+            }
+            fr.readAsDataURL(files[0]);
+        } else {
+            // unsupported browser/no file selected
+        }
+    }
+
+</script>
+</body>
+</html>
+
+
+{#{% extends "placeandbooking/base.html" %}#}
+{#{% block body_block %}#}
+{##}
+{#    <h1>#}
+{#        {% if not new_place %}#}
+{#        Add your place#}
+{#        {% endif %}#}
+{#    </h1>#}
+{##}
+{#    <form method="POST">#}
+{#        {% csrf_token %}#}
+{#        {{ form.as_p }}#}
+{#        <input type="submit" value="Register my place" >#}
+{#    </form>#}
+{##}
+{#{% endblock %}#}
+{##}
