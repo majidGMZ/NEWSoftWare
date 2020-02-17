@@ -67,6 +67,7 @@ ROOT_URLCONF = 'SoftWare.urls'
 LOGIN_REQUIRED_IGNORE_VIEW_NAMES = [
     'account:login',
     'account:signup',
+    'admin',
 ]
 
 
@@ -149,3 +150,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
