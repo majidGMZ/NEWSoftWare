@@ -1,0 +1,443 @@
+{#<html>#}
+{##}
+{##}
+{#<head>#}
+{#<title>W3.CSS Template</title>#}
+{#<meta charset="UTF-8">#}
+{# <meta name="viewport" content="initial-scale=1.0, width=device-width" />#}
+{#        <link#}
+{#            rel="stylesheet"#}
+{#            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"#}
+{#            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"#}
+{#            crossorigin="anonymous"#}
+{#        />#}
+{#        <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" crossorigin="anonymous" />#}
+{#<meta name="viewport" content="width=device-width, initial-scale=1">#}
+{#<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">#}
+{#<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">#}
+{#<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>#}
+{#<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">#}
+{#<style>#}
+{#    html, body, h1, h2, h3, h4, h5 {#}
+{#        font-family: "Open Sans", sans-serif#}
+{#    }#}
+{##}
+{#            body {#}
+{#                background: #3f8bc9;#}
+{#            }#}
+{#            .container{#}
+{#                margin-top: 1rem;#}
+{#                margin-bottom: 1rem;#}
+{#            }#}
+{#            .container nav.navbar{#}
+{#                border: 1px solid rgba(0,0,0,.125);#}
+{#                border-radius: .25rem;#}
+{#            }#}
+{#            .avatar-container img {#}
+{#                width: 100%;#}
+{#                object-fit: cover;#}
+{#                height: 100%;#}
+{#            }#}
+{#            .avatar-container {#}
+{#                position: relative;#}
+{#                height: 150px;#}
+{#            }#}
+{#            .avatar-container .btn-action-edit {#}
+{#                position: absolute;#}
+{#                bottom: 15px;#}
+{#                right: 15px;#}
+{#            }#}
+{#            .user-details > * {#}
+{#                border-bottom: 1px solid #dddddd;#}
+{##}
+{#                padding-bottom: 10px !important;#}
+{#                margin-bottom: 20px !important;#}
+{#            }#}
+{##}
+{#            .user-details > *:last-child {#}
+{#                border-bottom: none;#}
+{##}
+{#                padding-bottom: 0 !important;#}
+{#                margin-bottom: 0 !important;#}
+{#            }#}
+{#            .user-details .details {#}
+{#                list-style-type: none;#}
+{#                padding: 0;#}
+{#                margin: 0;#}
+{#            }#}
+{#            .user-details .details li {#}
+{#                margin: 0;#}
+{#                padding: 0;#}
+{#                margin-bottom: 5px;#}
+{#            }#}
+{#            .user-details .details li i {#}
+{#                margin-right: 5px;#}
+{#            }#}
+{##}
+{#            .skills > div {#}
+{#                margin-bottom: 0.5rem;#}
+{#            }#}
+{#            .skills > div p {#}
+{#                padding: 0;#}
+{#                margin: 0;#}
+{#                margin-bottom: 5px;#}
+{#            }#}
+{##}
+{#            .user-fullname-container {#}
+{#                display: flex;#}
+{#                justify-content: space-between;#}
+{#                align-items: center;#}
+{#            }#}
+{##}
+{#            .page-title {#}
+{#                border-bottom: 1px solid #dddddd;#}
+{#                padding-bottom: 5px;#}
+{#                margin-bottom: 15px;#}
+{#            }#}
+{#            .page-profile-edit #avatar{#}
+{#                cursor: pointer;#}
+{#            }#}
+{##}
+{#</style>#}
+{##}
+{#</head>#}
+{##}
+{#<body >#}
+{#            <form method="post">#}
+{#              {% csrf_token %}#}
+{#              {{ form.as_p }}#}
+{#              #}
+{#            </form>#}
+{##}
+{#    </body>#}
+{##}
+{#</html>#}
+
+
+<!DOCTYPE html>
+{% load static %}
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+<link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous"
+/>
+<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@5.12.1/css/all.min.css"
+      crossorigin="anonymous"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    html, body, h1, h2, h3, h4, h5 {
+        font-family: "Open Sans", sans-serif
+    }
+
+    body {
+        background: #3f8bc9;
+    }
+
+    .container {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .container nav.navbar {
+        border: 1px solid rgba(0, 0, 0, .125);
+        border-radius: .25rem;
+    }
+
+    .avatar-container img {
+        width: 100%;
+        object-fit: cover;
+        height: 100%;
+    }
+
+    .avatar-container {
+        position: relative;
+        height: 150px;
+    }
+
+    .avatar-container .btn-action-edit {
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .user-details > * {
+        border-bottom: 1px solid #dddddd;
+
+        padding-bottom: 10px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .user-details > *:last-child {
+        border-bottom: none;
+
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    .user-details .details {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .user-details .details li {
+        margin: 0;
+        padding: 0;
+        margin-bottom: 5px;
+    }
+
+    .user-details .details li i {
+        margin-right: 5px;
+    }
+
+    .skills > div {
+        margin-bottom: 0.5rem;
+    }
+
+    .skills > div p {
+        padding: 0;
+        margin: 0;
+        margin-bottom: 5px;
+    }
+
+    .user-fullname-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .page-title {
+        border-bottom: 1px solid #dddddd;
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+    }
+
+    .page-profile-edit #avatar {
+        cursor: pointer;
+    }
+
+</style>
+<body class="w3-theme-l5">
+
+<!-- Navbar -->
+<div class="w3-top">
+    <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
+           href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+        <a href="{% url 'event:list_event' %}" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-bug w3-xxlarge"></i></a>
+  <a href="{% url 'account:profile' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Profile"><i class="fa fa-user"></i></a>
+  <a href="{% url 'account:logout' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Sign out"><i class="fa fa-sign-out fa-lg"></i></a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
+           title="My Account">
+
+            <!--  <img src="/w3images/avatar2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar"> -->
+        </a>
+    </div>
+</div>
+
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+</div>
+
+<body class="page-profile-edit">
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Profile</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="container">
+
+    <form class="row" method="post">
+        {% csrf_token %}
+        <div class="col-md-4">
+            <aside class="card profile" id="sidebar">
+                <div class="card-img-top avatar-container">
+                    <img class="avatar" id="avatar" src="https://placehold.it/600x400" alt="Card image cap"/>
+                    <input type="file" name="avatarFile" style="display: none;"/>
+                </div>
+                <div class="card-body">
+                    <!-- <div class="card-title user-fullname-container">
+                        <input class="form-control form-control-lg" placeholder="Full name" onchange="changeAvatarEvent"/>
+                    </div> -->
+                    <div class="card-text user-details">
+
+                        <!-- <div class="skills">
+                             <div>
+                                 <p>English</p>
+                                 <div class="progress"><div class="progress-bar" style="width:30%;"></div></div>
+                             </div>
+                             <div>
+                                 <p>English</p>
+                                 <div class="progress"><div class="progress-bar" style="width:70%;"></div></div>
+                             </div>
+                             <div>
+                                 <p>English</p>
+                                 <div class="progress"><div class="progress-bar" style="width:100%;"></div></div>
+                             </div>
+                         </div> -->
+                    </div>
+                </div>
+            </aside>
+        </div>
+        <div class="col-md-8">
+            <section id="main-content" class="profile-info card">
+                <div class="card-body">
+                    <h1 class="page-title">User Profile</h1>
+                    <div class="form-group">
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="checkfield1"
+                                   name="checkfield1">
+                            <label class="form-check-label" for="checkfield1">
+                                Available as Host?
+                            </label>
+                        </div>
+
+                        <label>About Me</label>
+                        <input class="form-control" placeholder="what?" name="about" value="{{ user.about }}"/>
+                        <!--  <label for="cars" style="vertical-align: top;">About Me</label> -->
+                        <!-- <textarea name="about">{{ user.about }}</textarea> -->
+                    </div>
+                    <div class="form-group">
+                        <label>My Interests</label>
+                        <input class="form-control" placeholder="what?" name="interest" value="{{ user.interest }}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Education</label>
+                        <input class="form-control" placeholder="what?" name="education" value="{{ user.education }}"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Where I grow up</label>
+                        <input class="form-control" placeholder="where?" name="wigu" value="{{ user.wigu }}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Countries I visit</label>
+                        <input class="form-control" placeholder="where?" name="civ" value="{{ user.civ }}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Countries I lived in</label>
+                        <textarea class="form-control" placeholder="where?" name="cil">{{ user.cil }}</textarea>
+                    </div>
+
+
+                    <div class="action">
+
+                         <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save Changes</button>
+{#                        <a href="#" class="btn btn-primary"><i class="fa fa-save"></i>#}
+{#                            Save Changes</a>#}
+
+                        <a href="{% url 'account:profile' %}" class="btn btn-outline-secondary"><i
+                                class="fa fa-window-close"></i> Cancel</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </form>
+</div>
+<script>
+    var avatarImage = document.getElementById("avatar");
+    var avatarFile = document.getElementsByName('avatarFile').item(0);
+    avatarImage.onclick = function (event) {
+        avatarFile.click();
+        return false;
+    }
+    avatarFile.onchange = function (event) {
+        var tgt = event.target || window.event.srcElement,
+            files = tgt.files;
+
+        var fr = new FileReader();
+        if (FileReader && files && files.length) {
+            var fr = new FileReader();
+            fr.onload = function () {
+                avatarImage.src = fr.result;
+            }
+            fr.readAsDataURL(files[0]);
+        } else {
+            // unsupported browser/no file selected
+        }
+    }
+
+</script>
+</body>
+
+
+<footer class="w3-container w3-theme-d3 w3-padding-16"
+        style="clear: both;position: relative; height: 100px; margin-top: 200px;">
+    <p><a href="http://www.airbnb.com"
+          style="display: table; text-decoration: none; text-align: center; margin-left: auto;margin-right: auto;"
+          target="_blank">Contact Us</a></p>
+
+</footer>
+
+<footer class="w3-container w3-white">
+    <p></p>
+</footer>
+
+<script>
+    // Accordion
+    function myFunction(id) {
+        var x = document.getElementById(id);
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+            x.previousElementSibling.className += " w3-theme-d1";
+        } else {
+            x.className = x.className.replace("w3-show", "");
+            x.previousElementSibling.className =
+                x.previousElementSibling.className.replace(" w3-theme-d1", "");
+        }
+    }
+
+    // Used to toggle the menu on smaller screens when clicking on the menu button
+    function openNav() {
+        var x = document.getElementById("navDemo");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+</script>
+
+</body>
+</html>
