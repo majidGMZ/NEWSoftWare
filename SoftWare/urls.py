@@ -16,19 +16,27 @@ Including another URLconf
 
 # a comment for test commit
 # second comment for test2 commit
-
+from django.conf.urls.static import static
 from django.contrib import admin
 
 from django.urls import path,include
 
+from SoftWare import settings
 from account.views import Auth
 from panel.views import Panel
 from front.views import Front
 
+
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('placeandbooking.urls'), name='bookingplace'),
-    path('f/', include('event.urls'), name='event_project'),
+    path('', include('event.urls'), name='event_project'),
     path('',include('account.urls'), name = 'account_url')
 ]
 
+
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL,
+                              document_root=settings.MEDIA_ROOT)
