@@ -33,6 +33,7 @@ class EventDetailView(DetailView):
     template_name = 'event/event_detail.html'
 
 
+
 class CommentOneEventDetailView(DetailView):
     context_object_name = 'comment_detail_one_event'
     queryset = models.Events.objects.all()
@@ -267,6 +268,17 @@ class Joinevent(RedirectView):
             HttpResponse("<h1> you are noe a member</h1>")
 
         return super().get(request, *args, **kwargs)
+
+
+class Events_I_joined(ListView):
+    model = models.MemberEvent
+    context_object_name = 'myevent'
+    template_name = "event/events_I_joined.html"
+
+    def get_queryset(self):
+        account = self.request.user
+        query = models.MemberEvent.objects.filter(account=account)
+        return query
 
 
 class LeaveEvent(RedirectView):

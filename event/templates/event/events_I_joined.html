@@ -63,7 +63,7 @@
                 <div class="w3-col m12">
                     <div class="w3-card w3-round w3-theme-l1">
                         <div class="w3-container w3-padding">
-                            <p class="w3-large ">Places found</p>
+                            <p class="w3-large ">Events You Joined</p>
                         </div>
                     </div>
                 </div>
@@ -73,13 +73,13 @@
 
 
 
-            {% for place in object_list %}
+            {% for event in myevent %}
                 <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-                    <span class="w3-right w3-opacity"> Capacity: {{ place.Capacity }} </span>
-                    <h4>{{ place.City }}</h4><br>
+                    <span class="w3-right w3-opacity"> Start date {{ event.event.created_date }} </span>
+                    <h4>{{ event.event.account.username }}</h4><br>
                     <hr class="w3-clear">
-                    <p>{{ place.Description }}</p>
-                    <a href="{% url 'placeandbooking:place_detail' pk=place.pk %}" style="text-decoration: none"> <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"> Show detial</button></a>
+                    <p>{{ event.event.text }}</p>
+
                 </div>
             {% endfor %}
 
@@ -156,7 +156,8 @@
 <!-- End Page Container -->
 <br>
 
-<footer class="w3-container w3-theme-d3 w3-padding-16" style="clear: both;position: relative; height: 100px; margin-top: 200px;">
+<footer class="w3-container w3-theme-d3 w3-padding-16"
+        style="clear: both;position: relative; height: 100px; margin-top: 200px;">
     <p><a href="http://www.airbnb.com"
           style="display: table; text-decoration: none; text-align: center; margin-left: auto;margin-right: auto;"
           target="_blank">Contact Us</a></p>
@@ -196,21 +197,51 @@
 </html>
 
 
-
-
-
-
-
-
-
-
-
+{#{% extends "placeandbooking/base.html" %}#}
+{#{% block body_block %}#}
+{##}
+{##}
+{##}
+{##}
+{##}
 {#    <h1>Results:</h1>#}
 {#    <ul>#}
-{#        {% for place in object_list %}#}
-{#        <li>#}
-{#            <h3><a href="{{ place.id }}">{{ place.Address }}</a></h3>#}
-{#        </li>#}
+{#        {% for book in books %}#}
+{#            <li>#}
+{#                <h3><a href="{{ book.id }}">{{ book.id }}</a></h3>#}
+{#            </li>#}
 {#        {% endfor %}#}
 {#    </ul>#}
+{##}
+{##}
+{#{% endblock %}#}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    {% for event in myevent %}
+        <h1>
+            {{ event.event.title }}
+        </h1>
+    {% endfor %}
+</body>
+</html>

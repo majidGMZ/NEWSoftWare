@@ -6,6 +6,11 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <style>
     body, h1, h2, h3, h4, h5, h6 {
@@ -19,26 +24,38 @@
 <body class="w3-content w3-border-left w3-border-right">
 
 <!-- Sidebar/menu -->
+
 <nav class="w3-sidebar w3-light-grey w3-collapse w3-top" style="z-index:3;width:260px" id="mySidebar">
     <div class="w3-container w3-display-container w3-padding-16">
         <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-transparent w3-display-topright"></i>
+        <h3>Host</h3>
+        <h4>{{ place_detail.account.username }}</h4>
         <h3>Rental</h3>
-        <h3>from $99</h3>
+        <h3>from ${{ place_detail.Price }}</h3>
         <h6>per night</h6>
         <hr>
-        <form action="/action_page.php" target="_blank">
-            <p><label><i class="fa fa-calendar-check-o"></i> Check In</label></p>
-            <input class="w3-input w3-border" type="text" placeholder="DD MM YYYY" name="CheckIn" required>
-            <p><label><i class="fa fa-calendar-o"></i> Check Out</label></p>
-            <input class="w3-input w3-border" type="text" placeholder="DD MM YYYY" name="CheckOut" required>
-            <p>
-                <a href="{% url 'placeandbooking:send_request' place_detail.id %}">
+{#        <form action="/action_page.php" target="_blank">#}
+{#            <p><label><i class="fa fa-calendar-check-o"></i> Check In</label></p>#}
+{#            <input class="w3-input w3-border" type="text" placeholder="DD MM YYYY" name="CheckIn" required>#}
+{#            <p><label><i class="fa fa-calendar-o"></i> Check Out</label></p>#}
+{#            <input class="w3-input w3-border" type="text" placeholder="DD MM YYYY" name="CheckOut" required>#}
+{#            <p>#}
+{#                <a href="{% url 'placeandbooking:send_request' place_detail.id %}">#}
+{#                    <button class="w3-button w3-block w3-green w3-left-align" type="submit">#}
+{#                        <i class="fa w3-margin-right"></i> Send Request#}
+{#                    </button>#}
+{#                </a>#}
+{#            </p>#}
+{#        </form>#}
+        {%ifequal place_detail.account user %}
+            <h4>YOUR OWN PLACE</h4>
+        {% else %}
+        <a href="{% url 'placeandbooking:send_request' place_detail.id %}" style="text-decoration: none">
                     <button class="w3-button w3-block w3-green w3-left-align" type="submit">
                         <i class="fa w3-margin-right"></i> Send Request
                     </button>
-                </a>
-            </p>
-        </form>
+        </a>
+        {% endifequal %}
     </div>
 </nav>
 
@@ -167,27 +184,27 @@
 
 
 
-
-{% extends "placeandbooking/base.html" %}
-{% block body_block %}
-
-    <h1>place {{ place_detail.Address }} details:</h1>
-
-    <div>
-        <h2>City: {{ place_detail.City }}</h2>
-        <h2>Address: {{ place_detail.Address }}</h2>
-        <h2>Home type: {{ place_detail.KindofHome }}</h2>
-        <h2>Room type: {{ place_detail.RoomType }}</h2>
-        <h2>Beds: {{ place_detail.Capacity }}</h2>
-        <h2>Description: {{ place_detail.Description }}</h2>
-        <h2>Photo: {{ place_detail.PlacePhoto }}</h2>
-        <h2>Pets allowed: {{ place_detail.Pets }}</h2>
-        <h2>Kids at home: {{ place_detail.Kids }}</h2>
-        <h2>Smoking allowed: {{ place_detail.SmokingAllowed }}</h2>
-        <h2>Host Language: {{ place_detail.HostLanguage }}</h2>
-    </div>
-
-
-    <a href="{% url 'placeandbooking:send_request' place_detail.id %}"><button type="submit">Send Request</button></a>
-
-{% endblock %}
+{##}
+{#{% extends "placeandbooking/base.html" %}#}
+{#{% block body_block %}#}
+{##}
+{#    <h1>place {{ place_detail.Address }} details:</h1>#}
+{##}
+{#    <div>#}
+{#        <h2>City: {{ place_detail.City }}</h2>#}
+{#        <h2>Address: {{ place_detail.Address }}</h2>#}
+{#        <h2>Home type: {{ place_detail.KindofHome }}</h2>#}
+{#        <h2>Room type: {{ place_detail.RoomType }}</h2>#}
+{#        <h2>Beds: {{ place_detail.Capacity }}</h2>#}
+{#        <h2>Description: {{ place_detail.Description }}</h2>#}
+{#        <h2>Photo: {{ place_detail.PlacePhoto }}</h2>#}
+{#        <h2>Pets allowed: {{ place_detail.Pets }}</h2>#}
+{#        <h2>Kids at home: {{ place_detail.Kids }}</h2>#}
+{#        <h2>Smoking allowed: {{ place_detail.SmokingAllowed }}</h2>#}
+{#        <h2>Host Language: {{ place_detail.HostLanguage }}</h2>#}
+{#    </div>#}
+{##}
+{##}
+{#    <a href="{% url 'placeandbooking:send_request' place_detail.id %}"><button type="submit">Send Request</button></a>#}
+{##}
+{#{% endblock %}#}
