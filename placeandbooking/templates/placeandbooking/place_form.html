@@ -1,16 +1,254 @@
-{% extends "placeandbooking/base.html" %}
-{% block body_block %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" crossorigin="anonymous" />
+        <style>
 
-    <h1>
-        {% if not new_place %}
-        Add your place
-        {% endif %}
-    </h1>
+            body {
+                background: #3f8bc9;
+            }
+            .container{
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+            .container nav.navbar{
+                border: 1px solid rgba(0,0,0,.125);
+                border-radius: .25rem;
+            }
+            .avatar-container img {
+                width: 100%;
+                object-fit: cover;
+                height: 100%;
+            }
+            .avatar-container {
+                position: relative;
+                height: 150px;
+            }
+            .avatar-container .btn-action-edit {
+                position: absolute;
+                bottom: 15px;
+                right: 15px;
+            }
+            .user-details > * {
+                border-bottom: 1px solid #dddddd;
 
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Register my place" >
-    </form>
+                padding-bottom: 10px !important;
+                margin-bottom: 20px !important;
+            }
 
-{% endblock %}
+            .user-details > *:last-child {
+                border-bottom: none;
+
+                padding-bottom: 0 !important;
+                margin-bottom: 0 !important;
+            }
+            .user-details .details {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+            }
+            .user-details .details li {
+                margin: 0;
+                padding: 0;
+                margin-bottom: 5px;
+            }
+            .user-details .details li i {
+                margin-right: 5px;
+            }
+
+            .skills > div {
+                margin-bottom: 0.5rem;
+            }
+            .skills > div p {
+                padding: 0;
+                margin: 0;
+                margin-bottom: 5px;
+            }
+
+            .user-fullname-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .page-title {
+                border-bottom: 1px solid #dddddd;
+                padding-bottom: 5px;
+                margin-bottom: 15px;
+            }
+            .page-profile-edit #avatar{
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body class="page-profile-edit">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">Navbar</a>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Profile</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="container">
+            <form class="row">
+                <div class="col-md-4">
+                    <aside class="card profile" id="sidebar">
+                        <div class="card-img-top avatar-container">
+                            <img class="avatar" id="avatar" src="https://placehold.it/600x400" alt="Card image cap" />
+                            <input type="file" name="avatarFile" style="display: none;" />
+                        </div>
+                        <div class="card-body">
+                            <!-- <div class="card-title user-fullname-container">
+                                <input class="form-control form-control-lg" placeholder="Full name" onchange="changeAvatarEvent"/>
+                            </div> -->
+                            <div class="card-text user-details">
+
+                               <!-- <div class="skills">
+                                    <div>
+                                        <p>English</p>
+                                        <div class="progress"><div class="progress-bar" style="width:30%;"></div></div>
+                                    </div>
+                                    <div>
+                                        <p>English</p>
+                                        <div class="progress"><div class="progress-bar" style="width:70%;"></div></div>
+                                    </div>
+                                    <div>
+                                        <p>English</p>
+                                        <div class="progress"><div class="progress-bar" style="width:100%;"></div></div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+                <div class="col-md-8">
+                    <section id="main-content" class="profile-info card">
+                        <div class="card-body">
+                            <h1 class="page-title">User Profile</h1>
+                            <div class="form-group">
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="checkfield1" name="checkfield1">
+                                    <label class="form-check-label" for="checkfield1">
+                                        Available as Host?
+                                    </label>
+                                </div>
+
+                                <label>About Me</label>
+                                <input class="form-control" placeholder="what?" name="about" value="{{ user.about }}"/>
+                               <!--  <label for="cars" style="vertical-align: top;">About Me</label> -->
+                                <!-- <textarea name="about">{{ user.about }}</textarea> -->
+                            </div>
+                            <div class="form-group">
+                                <label>My Interests</label>
+                                <input class="form-control" placeholder="what?" name="interest" value="{{ user.interest }}" />
+                            </div>
+                            <div class="form-group">
+                                <label>Education</label>
+                                <input class="form-control" placeholder="what?" name="education" value="{{ user.education }}" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Where I grow up</label>
+                                <input class="form-control" placeholder="where?" name="wigu" value="{{ user.wigu}}" />
+                            </div>
+                            <div class="form-group">
+                                <label>Countries I visit</label>
+                                <input class="form-control" placeholder="where?" name="civ" value="{{ user.civ}}" />
+                            </div>
+                            <div class="form-group">
+                                <label>Countries I lived in</label>
+                                <textarea class="form-control" placeholder="where?" name="cil">{{ user.cil }}</textarea>
+                            </div>
+
+
+                            <div class="action">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save Changes</button>
+                                <a href="" class="btn btn-outline-secondary"><i class="fa fa-window-close"></i> Cancel</a>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </form>
+        </div>
+        <script>
+            var avatarImage = document.getElementById("avatar");
+            var avatarFile = document.getElementsByName('avatarFile').item(0);
+            avatarImage.onclick = function(event){
+                avatarFile.click();
+                return false;
+            }
+            avatarFile.onchange = function(event){
+                var tgt = event.target || window.event.srcElement,
+                files = tgt.files;
+
+                var fr = new FileReader();
+                if (FileReader && files && files.length) {
+                    var fr = new FileReader();
+                    fr.onload = function () {
+                        avatarImage.src = fr.result;
+                    }
+                    fr.readAsDataURL(files[0]);
+                }
+                else{
+                    // unsupported browser/no file selected
+                }
+            }
+
+        </script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+{#    <h1>#}
+{#        {% if not new_place %}#}
+{#        Add your place#}
+{#        {% endif %}#}
+{#    </h1>#}
+{##}
+{#    <form method="POST">#}
+{#        {% csrf_token %}#}
+{#        {{ form.as_p }}#}
+{#        <input type="submit" value="Register my place" >#}
+{#    </form>#}

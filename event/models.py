@@ -16,7 +16,7 @@ class Events(models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='event_user')
     title = models.CharField(max_length=200)
     text = models.TextField()
-    city = models.TextField()
+    city = models.CharField(max_length=50)
     created_date = models.DateTimeField(default=timezone.now)
     date_from = models.DateField(default=timezone.now)
     clock_from = models.TimeField(default=timezone.now)
@@ -58,7 +58,7 @@ class Comment(models.Model):
 
 class Discussion(models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='discussion_account')
-    city = models.TextField()
+    city = models.CharField(max_length=50)
     title = models.CharField(max_length=200)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
@@ -75,12 +75,12 @@ class Discussion(models.Model):
 
     def approved_comments(self):
         return self.comments.filter(approved_comment=True)
-
-    def jdate_to(self):
-        return jalali_converter(self.date_to)
-
-    def jdate_from(self):
-        return jalali_converter(self.date_from)
+    #
+    # def jdate_to(self):
+    #     return jalali_converter(self.date_to)
+    #
+    # def jdate_from(self):
+    #     return jalali_converter(self.date_from)
 
 
 class CommentDiscussion(models.Model):

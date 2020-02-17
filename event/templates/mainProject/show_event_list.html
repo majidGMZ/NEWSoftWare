@@ -20,11 +20,11 @@
     <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
         <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
            href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-        <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-bug w3-xxlarge"></i></a>
+        <a href="{% url 'event:list_event' %}" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-bug w3-xxlarge"></i></a>
 
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+        <a href="{% url 'account:profile' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
            title="Account Settings"><i class="fa fa-user"></i></a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Sign out"><i
+        <a href="{% url 'account:logout' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Sign out"><i
                 class="fa fa-sign-out fa-lg"></i></a>
         <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
            title="My Account">
@@ -52,7 +52,7 @@
             <!-- Profile -->
 
 
-            <!-- End Left Column --> -->
+            <!-- End Left Column -->  .
 
 
         </div>
@@ -63,7 +63,11 @@
                 <div class="w3-col m12">
                     <div class="w3-card w3-round w3-theme-l1">
                         <div class="w3-container w3-padding">
-                            <p class="w3-large ">Events found</p>
+                            {% ifequal object_list.count 0 %}
+                                <p>Event Not found</p>
+                            {% else %}
+                                <p class="w3-large ">Events found</p>
+                            {% endifequal %}
                         </div>
                     </div>
                 </div>
@@ -71,20 +75,30 @@
 
             <!-- Middle Column  HOST-->
 
-
-
-            {% for event in object_list %}
+            {% ifequal object_list.count 0 %}
                 <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-                    <img src="/w3images/avatar5.png" alt="Avatar" class="w3-left w3-circle w3-margin-right"
-                         style="width:60px">
-                    <span class="w3-right w3-opacity">{{ event.date }}</span>
-                    <h4>{{ event.account }}</h4><br>
-                    <hr class="w3-clear">
-                    <p>{{ event.text }}</p>
-                    <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"> Show detial</button>
-                    <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom">  Join</button>
+
+                    <h4>There is not event in this city</h4><br>
+
                 </div>
-            {% endfor %}
+            {% else %}
+
+                {% for event in object_list %}
+                    <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+
+                        <span class="w3-right w3-opacity">START : {{ event.date_from }}</span>
+                        <h4>{{ event.title }}</h4><br>
+                        <hr class="w3-clear">
+                        <p>{{ event.text }}</p>
+                        <a href="{% url 'event:event_detail' pk=event.pk %} ">
+                            <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"> Show detial</button>
+                        </a>
+                        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom">  Join</button>
+                    </div>
+
+                {% endfor %}
+            {% endifequal %}
+
 
 
             <!-- Middle Column Disscusion-->
@@ -159,7 +173,8 @@
 <!-- End Page Container -->
 <br>
 
-<footer class="w3-container w3-theme-d3 w3-padding-16" style="clear: both;position: relative; height: 100px; margin-top: 200px;">
+<footer class="w3-container w3-theme-d3 w3-padding-16"
+        style="clear: both;position: relative; height: 100px; margin-top: 200px;">
     <p><a href="http://www.airbnb.com"
           style="display: table; text-decoration: none; text-align: center; margin-left: auto;margin-right: auto;"
           target="_blank">Contact Us</a></p>

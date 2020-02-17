@@ -17,10 +17,12 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
 <div class="w3-top">
  <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
   <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-bug w3-xxlarge"></i></a>
+ <a href="{% url 'event:list_event' %}" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-bug w3-xxlarge"></i></a>
 
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Sign out"><i class="fa fa-sign-out fa-lg"></i></a>
+        <a href="{% url 'account:profile' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+           title="Account Settings"><i class="fa fa-user"></i></a>
+        <a href="{% url 'account:logout' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Sign out"><i
+                class="fa fa-sign-out fa-lg"></i></a>
   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
 
   <!--  <img src="/w3images/avatar2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar"> -->
@@ -94,7 +96,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
           <div class="w3-card w3-round w3-white w3-center">
         <div class="w3-container">
 
-            <form method="get" action="/event">
+            <form method="get" action="{% url 'event:event_create' %}">
               <p><button class="w3-button w3-block w3-theme-l4">Create New Event</button></p>
               </form>
              <form method="get" action="/discussion/create">
@@ -174,17 +176,28 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
           </div>
         </div>
       </div>
+{#          {% for a in event_all%}#}
+{#      <h1> <a href="{% url 'event:discussion_detail' pk=a.pk %}" >{{ a.title}}</a> </h1>#}
+{#        <p>username: {{a.username}}</p>#}
+{#        <p>city: {{ a.city }}</p>#}
+{#        <a href="{% url 'event:discussion_detail' pk=a.pk %}">Comments: {{ a.comments_discussion.count}}</a>#}
+{#    {% endfor %}#}
 
-
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+     {% for dis in discussion_list %}
+           <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
         <img src="/w3images/avatar5.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-        <span class="w3-right w3-opacity">16 min</span>
-        <h4>Jane Doe</h4><br>
+        <span class="w3-right w3-opacity">{{ dis.created_date}}</span>
+        <h4>{{dis.account}}</h4><br>
         <hr class="w3-clear">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom">Show This Discussion</button>
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button>
+        <p>{{ dis.text }}</p>
+               <a href="{% url 'event:discussion_detail' pk=dis.pk  %} "><button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"> Show detail</button></a>
       </div>
+         {% empty %}
+    <p>No comments here yet :(</p>
+     {% endfor %}
+
+
+
 
         <div class="w3-row-padding">
         <div class="w3-col m12">
