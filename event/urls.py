@@ -27,6 +27,7 @@ urlpatterns = [
     path('event/join/<int:pk>', views.Joinevent.as_view(), name='join_event'),
     path('event/left/<int:pk>',views.LeaveEvent.as_view(),name='leave'),
     path('index/', views.index, name='list_event'),
-    path('myevents/', views.Events_I_joined.as_view(),name='my_event_list')
+    path('myevents/', views.Events_I_joined.as_view(),name='my_event_list'),
+    # path('event/search/member', views.Memberevent.as_view(), name='list_member'),
 
 ]

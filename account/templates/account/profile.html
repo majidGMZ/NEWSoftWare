@@ -17,6 +17,34 @@
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+     .w3-theme {
+color:#fff !important;background-color:#3f51b5 !important}
+.w3-theme-light {
+color:#000 !important;background-color:#e8eaf6 !important}
+.w3-theme-dark {
+color:#fff !important;background-color:#1a237e !important}
+.w3-theme-l5 {
+color:#000 !important;background-color:#E0DFE1 !important}
+.w3-theme-l4 {
+color:#000 !important;background-color:#bc8f9d !important}
+.w3-theme-l3 {
+color:#000 !important;background-color:#9fa8da !important}
+.w3-theme-l2 {
+color:#fff !important;background-color:#7986cb !important}
+.w3-theme-l1 {
+color:#fff !important;background-color:#945D6E !important}
+.w3-theme-d1 {
+color:#fff !important;background-color:#bc8f9d !important}
+.w3-theme-d2 {
+color:#fff !important;background-color:#6B384E !important}
+.w3-theme-d3 {
+color:#fff !important;background-color:#6B384E !important}
+.w3-theme-d4 {
+color:#fff !important;background-color:#1a237e !important}
+.w3-theme-action {
+color:#fff !important;background-color:#311b92 !important}
+.w3-text-theme {
+color:#1a237e !important}
     html, body, h1, h2, h3, h4, h5 {
         font-family: "Open Sans", sans-serif
     }
@@ -105,7 +133,8 @@
     <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
         <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
            href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-        <a href="{% url 'event:list_event' %}" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-bug w3-xxlarge"></i></a>
+        <a href="{% url 'event:list_event' %}" class="w3-bar-item w3-button w3-padding-large ">
+            <img src="/static/event/images/icon.jpg" alt="icon" width="42" height="42"></img></a>
   <a href="{% url 'account:profile' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Profile"><i class="fa fa-user"></i></a>
   <a href="{% url 'account:logout' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Sign out"><i class="fa fa-sign-out fa-lg"></i></a>
         <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
@@ -173,7 +202,7 @@
 <hr>
                             <div class="card-body ">
                             <h3>About Me</h3>
-                            <p>bla bla bla bla...</p>
+                            <p>{{ user.about}}</p>
 
                                      <a href="{% url 'account:edit-profile' %}" class="btn btn-outline-primary btn-action-edit"><i class="fa fa-edit"></i></a>
 {#                                    {% csrf_token %}#}
@@ -205,8 +234,8 @@
                     <section id="main-content" class="profile-info card">
                         <div class="card-body">
                             <h1 class="page-title">User Profile</h1>
-                            <h3>About Me</h3>
-                            <p>{{ user.about }}</p>
+{#                            <h3>About Me</h3>#}
+{#                            <p>{{ user.about }}</p>#}
                             <h3>My Interests</h3>
                             <p>{{ user.interest }}</p>
                             <h3>education</h3>

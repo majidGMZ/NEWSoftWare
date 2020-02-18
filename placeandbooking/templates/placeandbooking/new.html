@@ -101,29 +101,103 @@ color:#1a237e !important}
 
             <!-- Middle Column  HOST-->
 
-            {% ifequal object_list.count 0 %}
-                <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+            <div class="w3-row-padding">
+                <div class="w3-col m12">
+                    <div class="w3-card w3-round w3-white">
+                        <div class="w3-container w3-padding">
+                            <form class="row" method="post">
 
-                    <h4>There is not event in this city</h4><br>
 
-                </div>
-            {% else %}
+            {% csrf_token %}
+            <div class="col-md-8">
+            <section id="main-content" class="profile-info card">
+            <div class="card-body">
+            <h1 class="page-title">Add Your Place</h1>
 
-                {% for event in object_list %}
-                    <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+            <div class="form-group">
+                <label for="id_City">City</label>
+                <input type="text" name="City" maxlength="15" required="" id="id_City" class="form-control" placeholder="City">
+            </div>
 
-                        <span class="w3-right w3-opacity">START : {{ event.date_from }}</span>
-                        <h4>{{ event.title }}</h4><br>
-                        <hr class="w3-clear">
-                        <p>{{ event.text }}</p>
-                        <a href="{% url 'event:event_detail' pk=event.pk %} ">
-                            <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"> Show detial</button>
-                        </a>
+            <div class="form-group">
+                <label for="id_Address">Address</label>
+                <input type="text" name="Address" maxlength="256" required="" id="id_Address" class="form-control" placeholder="Address">
+            </div>
 
+            <div class="form-group">
+                <label for="id_KindofHome">Kind of Home</label>
+                <input type="text" name="KindofHome" maxlength="15" required="" id="id_KindofHome" class="form-control" placeholder="Home Kind">
+            </div>
+
+            <div class="form-group">
+                <label for="id_RoomType">Room Type</label>
+                <input type="text" name="RoomType" maxlength="15" required="" id="id_RoomType" class="form-control" placeholder="Room Type">
+            </div>
+
+            <div class="form-group">
+                <label for="id_Capacity">Capacity</label>
+                <input type="number" name="Capacity" min="0" required="" id="id_Capacity" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="id_Description">Description</label>
+                <textarea name="Description" cols="40" rows="10" required="" id="id_Description" class="form-control"></textarea>
+            </div>
+
+
+            <div class="form-check">
+                <input type="checkbox" name="Pets" id="id_Pets" class="form-check-input">
+                <label class="form-check-label" for="id_PlacePhoto">
+                    Pets Allowed
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" name="Kids" id="id_Kids" class="form-check-input">
+                <label class="form-check-label" for="id_Kids">
+                    Kids Allowed
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" name="SmokingAllowed" id="id_SmokingAllowed" class="form-check-input">
+                <label class="form-check-label" for="id_SmokingAllowed">
+                    Smoking Allowed
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label for="id_Price">Price</label>
+                <input type="number" name="Price" min="0" required="" id="id_Price" class="form-control">
+            </div>
+
+
+            <div class="action">
+
+
+                <button type="submit" class="btn btn-primary" value="Edit Info"><i class="fa fa-save"></i>Save
+                    Place
+                </button>
+
+                <a href="/event/home/" class="btn btn-outline-secondary"><i class="fa fa-window-close"></i> Cansel</a>
+            </div>
+
+
+
+
+
+        </div>
+        </section>
+        </div>
+    </form>
+                            <p contenteditable="true" class="w3-border w3-padding">Status: Feeling Blue</p>
+                            <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button>
+                        </div>
                     </div>
+                </div>
+            </div>
 
-                {% endfor %}
-            {% endifequal %}
+
 
 
             <!-- Middle Column Disscusion-->

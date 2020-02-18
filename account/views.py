@@ -29,7 +29,7 @@ class Auth:
                 raw_password = form.cleaned_data.get('password')
                 digits = "".join([random.choice(string.digits + string.ascii_letters) for i in range(10)])
                 email = EmailMessage('Hello', 'http://localhost:8000/panel/verify?link=' + digits,
-                                     to=['majid.gmz77@gmail.com'])  # fill this param
+                                     to=['mahsamovaffag@gmail.com'])  # fill this param
 
                 email.send()
                 form.link = digits

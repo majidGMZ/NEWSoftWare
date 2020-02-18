@@ -1,206 +1,113 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <link
-            rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-            crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@5.12.1/css/all.min.css"
-          crossorigin="anonymous"/>
-    <style>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+        .w3-theme {
+color:#fff !important;background-color:#3f51b5 !important}
+.w3-theme-light {
+color:#000 !important;background-color:#e8eaf6 !important}
+.w3-theme-dark {
+color:#fff !important;background-color:#1a237e !important}
+.w3-theme-l5 {
+color:#000 !important;background-color:#E0DFE1 !important}
+.w3-theme-l4 {
+color:#000 !important;background-color:#e1d0d7 !important}
+.w3-theme-l3 {
+color:#000 !important;background-color:#9fa8da !important}
+.w3-theme-l2 {
+color:#fff !important;background-color:#7986cb !important}
+.w3-theme-l1 {
+color:#fff !important;background-color:#945D6E !important}
+.w3-theme-d1 {
+color:#fff !important;background-color:#bc8f9d !important}
+.w3-theme-d2 {
+color:#fff !important;background-color:#6B384E !important}
+.w3-theme-d3 {
+color:#fff !important;background-color:#6B384E !important}
+.w3-theme-d4 {
+color:#fff !important;background-color:#1a237e !important}
+.w3-theme-action {
+color:#fff !important;background-color:#311b92 !important}
+.w3-text-theme {
+color:#1a237e !important}
+    html, body, h1, h2, h3, h4, h5 {
+        font-family: "Open Sans", sans-serif
+    }
 
-        body {
-            background: #3f8bc9;
-        }
+</style>
+<body class="w3-theme-l5">
 
-        .container {
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-        }
+<!-- Navbar -->
+<div class="w3-top">
+    <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
+           href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+        <a href="{% url 'event:list_event' %}" class="w3-bar-item w3-button w3-padding-large ">
+            <img src="/static/event/images/icon.jpg" alt="icon" width="42" height="42"></img></a>
 
-        .container nav.navbar {
-            border: 1px solid rgba(0, 0, 0, .125);
-            border-radius: .25rem;
-        }
+        <a href="{% url 'account:profile' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+           title="Account Settings"><i class="fa fa-user"></i></a>
+        <a href="{% url 'account:logout' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Sign out"><i
+                class="fa fa-sign-out fa-lg"></i></a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
+           title="My Account">
 
-        .avatar-container img {
-            width: 100%;
-            object-fit: cover;
-            height: 100%;
-        }
-
-        .avatar-container {
-            position: relative;
-            height: 150px;
-        }
-
-        .avatar-container .btn-action-edit {
-            position: absolute;
-            bottom: 15px;
-            right: 15px;
-        }
-
-        .user-details > * {
-            border-bottom: 1px solid #dddddd;
-
-            padding-bottom: 10px !important;
-            margin-bottom: 20px !important;
-        }
-
-        .user-details > *:last-child {
-            border-bottom: none;
-
-            padding-bottom: 0 !important;
-            margin-bottom: 0 !important;
-        }
-
-        .user-details .details {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .user-details .details li {
-            margin: 0;
-            padding: 0;
-            margin-bottom: 5px;
-        }
-
-        .user-details .details li i {
-            margin-right: 5px;
-        }
-
-        .skills > div {
-            margin-bottom: 0.5rem;
-        }
-
-        .skills > div p {
-            padding: 0;
-            margin: 0;
-            margin-bottom: 5px;
-        }
-
-        .user-fullname-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .page-title {
-            border-bottom: 1px solid #dddddd;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
-        }
-
-        .page-profile-edit #avatar {
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body class="page-profile-edit">
-<div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button
-                class="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-        >
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Profile</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+            <!--  <img src="/w3images/avatar2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar"> -->
+        </a>
+    </div>
 </div>
-<div class="container">
-    <form class="row" method="post">
 
-        {% if  new_place %}
-            {% csrf_token %}
-            <div class="col-md-8">
-            <section id="main-content" class="profile-info card">
-            <div class="card-body">
-            <h1 class="page-title">Edit Your Place Info</h1>
-            <div class="form-group">
-                <label>Place Description</label>
-                <textarea name="Description" cols="40" rows="10" required="" id="id_Description" class="form-control"
-                          placeholder="Description">
-                                    </textarea>
+<!-- Navbar on small screens -->
+
+
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
+    <!-- The Grid -->
+    <div class="w3-row">
+
+        <!-- Left Column -->
+        <div class="w3-col m3">
+            <!-- Profile -->
+
+
+
+            <!-- End Left Column -->  .
+
+
+        </div>
+
+        <!-- Middle Column -->
+        <div class="w3-col m7 ">
+            <div class="w3-row-padding">
+                <div class="w3-col m12">
+                    <div class="w3-card w3-round w3-theme-l1">
+                        <div class="w3-container w3-padding">
+                            {% ifequal object_list.count 0 %}
+                                <p>place</p>
+                            {% else %}
+                                <p class="w3-large ">Add Your Place</p>
+                            {% endifequal %}
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-check">
-                <input type="checkbox" name="Pets" id="id_Pets" class="form-check-input"
-                        {% if new_place.Pets %}
-                       checked
-                        {% else %}
+            <!-- Middle Column  HOST-->
 
-                        {% endif %}
-                >
-                <label class="form-check-label" for="checkfield1">
-                    Pets Allowed?
-                </label>
-            </div>
-
-            <div class="form-check">
-                <input type="checkbox" name="Kids" id="id_Kids" class="form-check-input"
-                 {% if new_place.Kids %}
-                       checked
-                        {% else %}
-
-                        {% endif %}
-                >
-                <label class="form-check-label" for="checkfield1">
-                    Kids Allowed?
-                </label>
-            </div>
-
-            <div class="form-check">
-                <input type="checkbox" name="SmokingAllowed" id="id_SmokingAllowed" class="form-check-input"
-                        {% if new_place.SmokingAllowed %}
-                       checked
-                        {% else %}
-
-                        {% endif %}>
-                <label class="form-check-label" for="checkfield1">
-                    Smoking Allowed?
-                </label>
-            </div>
+            <div class="w3-row-padding">
+                <div class="w3-col m12">
+                    <div class="w3-card w3-round w3-white">
+                        <div class="w3-container w3-padding">
+                            <form class="row" method="post">
 
 
-            <div class="action">
-
-                <a href="{% url 'placeandbooking:person_place_detail' pk=new_place.pk %}">
-                    <button type="submit" class="btn btn-primary" value="Edit Info"><i class="fa fa-save"></i>Save
-                        Changes
-                    </button>
-                </a>
-                <a href="{% url 'placeandbooking:person_place_detail' pk=new_place.pk %}"
-                   class="btn btn-outline-secondary"><i class="fa fa-window-close"></i> Cansel </a>
-            </div>
-
-        {% else %}
             {% csrf_token %}
             <div class="col-md-8">
             <section id="main-content" class="profile-info card">
@@ -208,50 +115,45 @@
             <h1 class="page-title">Add Your Place</h1>
 
             <div class="form-group">
-                <label for="id_City"">City</label>
-                <input type="text" name="City" maxlength="15" required="" id="id_City" class="form-control"
-                       placeholder="City"/>
+                <label for="id_City">City</label>
+                <input type="text" name="City" maxlength="15" required="" id="id_City" class="form-control w3-input w3-border w3-round" placeholder="City">
             </div>
 
             <div class="form-group">
                 <label for="id_Address">Address</label>
-                <input type="text" name="Address" maxlength="256" required="" id="id_Address" class="form-control"
-                       placeholder="Address"/>
+                <input type="text" name="Address" maxlength="256" required="" id="id_Address" class="form-control w3-input w3-border w3-round" placeholder="Address">
             </div>
 
             <div class="form-group">
                 <label for="id_KindofHome">Kind of Home</label>
-                <input type="text" name="KindofHome" maxlength="15" required="" id="id_KindofHome" class="form-control"
-                       placeholder="Home Kind"/>
+                <input type="text" name="KindofHome" maxlength="15" required="" id="id_KindofHome" class="form-control w3-input w3-border w3-round" placeholder="Home Kind">
             </div>
 
             <div class="form-group">
                 <label for="id_RoomType">Room Type</label>
-                <input type="text" name="RoomType" maxlength="15" required="" id="id_RoomType" class="form-control"
-                       placeholder="Room Type"/>
+                <input type="text" name="RoomType" maxlength="15" required="" id="id_RoomType" class="form-control w3-input w3-border w3-round" placeholder="Room Type">
             </div>
 
             <div class="form-group">
                 <label for="id_Capacity">Capacity</label>
-                <input type="number" name="Capacity" min="0" required="" id="id_Capacity" class="form-control"></textarea>
+                <input type="number" name="Capacity" min="0" required="" id="id_Capacity" class="form-control w3-input w3-border w3-round">
             </div>
 
             <div class="form-group">
                 <label for="id_Description">Description</label>
-                <textarea name="Description" cols="40" rows="10" required="" id="id_Description" class="form-control"></textarea>
+                <textarea name="Description" cols="40" rows="10" required="" id="id_Description" class="form-control w3-input w3-border w3-round"></textarea>
             </div>
 
 
             <div class="form-check">
-                <input type="checkbox" name="Pets" id="id_Pets" class="form-check-input">
-                <label class="form-check-label" for="id_PlacePhoto">
+                <label class="form-check-labelc" for="id_PlacePhoto">
                     Pets Allowed
                 </label>
             </div>
 
             <div class="form-check">
                 <input type="checkbox" name="Kids" id="id_Kids" class="form-check-input">
-                <label class="form-check-label" for="id_Kids">
+                <label class="form-check-label " for="id_Kids">
                     Kids Allowed
                 </label>
             </div>
@@ -265,7 +167,7 @@
 
             <div class="form-group">
                 <label for="id_Price">Price</label>
-                <input type="number" name="Price" min="0" required="" id="id_Price" class="form-control"/>
+                <input type="number" name="Price" min="0" required="" id="id_Price" class="form-control w3-input w3-border w3-round">
             </div>
 
 
@@ -276,59 +178,133 @@
                     Place
                 </button>
 
-                <a href="{% url 'event:home' %}"
-                   class="btn btn-outline-secondary"><i class="fa fa-window-close"></i> Cansel</a>
+                <a href="/event/home/" class="btn btn-outline-secondary"><i class="fa fa-window-close"></i> Cansel</a>
             </div>
 
 
 
 
-        {% endif %}
+
         </div>
         </section>
         </div>
     </form>
-</div>
-<script>
-    var avatarImage = document.getElementById("avatar");
-    var avatarFile = document.getElementsByName('avatarFile').item(0);
-    avatarImage.onclick = function (event) {
-        avatarFile.click();
-        return false;
-    }
-    avatarFile.onchange = function (event) {
-        var tgt = event.target || window.event.srcElement,
-            files = tgt.files;
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        var fr = new FileReader();
-        if (FileReader && files && files.length) {
-            var fr = new FileReader();
-            fr.onload = function () {
-                avatarImage.src = fr.result;
-            }
-            fr.readAsDataURL(files[0]);
+
+
+
+            <!-- Middle Column Disscusion-->
+
+
+            <!-- End Middle Column -->
+        </div>
+
+
+        <!-- Right Column -->
+        <!-- <div class="w3-col m2">
+          <div class="w3-card w3-round w3-white w3-center">
+            <div class="w3-container">
+              <p>Find Event</p>
+              <img src="/static/event/images/search_event.JPG" alt="Forest" style="width:100%;">
+              <form class="w3-container" action="." method="get">
+                      <p>
+                      <input class="w3-input" type="text" name="event_search" placeholder="Search...">
+                      <label>Write your city</label></p>
+                  <p><button class="w3-button w3-block w3-theme-l4">Search</button></p>
+                </form>
+
+            </div>
+          </div>
+          <br>
+             <div class="w3-card w3-round w3-white w3-center">
+            <div class="w3-container">
+              <p>Find Host</p>
+              <img src="/static/event/images/search_host.JPG" alt="Forest" style="width:100%;">
+              <form class="w3-container" action="." method="get">
+                      <p>
+                      <input class="w3-input" type="text" name="host_search" placeholder="Search...">
+                      <label>Write your city</label></p>
+                  <p><button class="w3-button w3-block w3-theme-l4">Search</button></p>
+                </form>
+
+            </div>
+          </div>
+
+          <div class="w3-card w3-round w3-white w3-center">
+            <div class="w3-container">
+              <p>Friend Request</p>
+              <img src="/w3images/avatar6.png" alt="Avatar" style="width:50%"><br>
+              <span>Jane Doe</span>
+              <div class="w3-row w3-opacity">
+                <div class="w3-half">
+                  <button class="w3-button w3-block w3-green w3-section" title="Accept"><i class="fa fa-check"></i></button>
+                </div>
+                <div class="w3-half">
+                  <button class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-remove"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+
+          <div class="w3-card w3-round w3-white w3-padding-16 w3-center">
+            <p>ADS</p>
+          </div>
+          <br>
+
+          <div class="w3-card w3-round w3-white w3-padding-32 w3-center">
+            <p><i class="fa fa-bug w3-xxlarge"></i></p>
+          </div> -->
+
+        <!-- End Right Column -->
+    </div>
+
+    <!-- End Grid -->
+</div>
+
+<!-- End Page Container -->
+<br>
+
+<footer class="w3-container w3-theme-d3 w3-padding-16"
+        style="clear: both;position: relative; height: 100px; margin-top: 200px;">
+    <p><a href="http://www.airbnb.com"
+          style="display: table; text-decoration: none; text-align: center; margin-left: auto;margin-right: auto;"
+          target="_blank">Contact Us</a></p>
+
+</footer>
+
+<footer class="w3-container w3-theme-l5">
+    <p></p>
+</footer>
+
+<script>
+    // Accordion
+    function myFunction(id) {
+        var x = document.getElementById(id);
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+            x.previousElementSibling.className += " w3-theme-d1";
         } else {
-            // unsupported browser/no file selected
+            x.className = x.className.replace("w3-show", "");
+            x.previousElementSibling.className =
+                x.previousElementSibling.className.replace(" w3-theme-d1", "");
         }
     }
 
+    // Used to toggle the menu on smaller screens when clicking on the menu button
+    function openNav() {
+        var x = document.getElementById("navDemo");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
 </script>
+
 </body>
 </html>
-
-
-{#{% extends "placeandbooking/base.html" %}#}
-{#{% block body_block %}#}
-{##}
-{#    <h1>#}
-{#        {% if not new_place %}#}
-{#        Add your place#}
-{#        {% endif %}#}
-{#    </h1>#}
-{##}
-{#    <form method="POST">#}
-{#        {% csrf_token %}#}
-{#        {{ form.as_p }}#}
-{#        <input type="submit" value="Register my place" >#}
-{#    </form>#}
-

@@ -33,7 +33,6 @@ class EventDetailView(DetailView):
     template_name = 'event/event_detail.html'
 
 
-
 class CommentOneEventDetailView(DetailView):
     context_object_name = 'comment_detail_one_event'
     queryset = models.Events.objects.all()
@@ -256,7 +255,7 @@ def navbar(request):
 class Joinevent(RedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
-        return reverse('event:home')
+        return reverse('event:list_event')
 
     def get(self, *args, **kwargs):
         event = get_object_or_404(models.Events, pk=self.kwargs.get('pk'))
@@ -284,7 +283,7 @@ class Events_I_joined(ListView):
 class LeaveEvent(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         # return reverse('event:event_search', kwargs={'pk': self.kwargs.get('pk')})
-        return reverse('event:home')
+        return reverse('event:list_event')
 
     def get(self, *args, **kwargs):
         try:
@@ -309,7 +308,7 @@ def index(request):
         'discussion_list': models.Discussion.objects.filter(city__icontains=city)
     }
 
-    return render(request, "mainProject/home.html",discussion_list)
+    return render(request, "mainProject/home.html", discussion_list)
 
 
 class SearchDiscussion(ListView):
@@ -321,3 +320,19 @@ class SearchDiscussion(ListView):
         query = account.wigu
         object_list = models.Discussion.objects.filter(city__icontains=query)
         return object_list
+
+
+# class showmembers(ListView):
+#     model = models.MemberEvent
+#     context_object_name = 'members'
+#     template_name = 'mainProject/memmbers.html'
+#
+#     def get_queryset(self):
+#         memmbers = models.MemberEvent.objects.filter()
+
+# def showmembers(request,pk):
+#     memmbers = {
+#         "memmbers": models.MemberEvent.objects.filter(event__id)
+#     }
+#     return render(request, "event/event_list.html", event_list)
+
